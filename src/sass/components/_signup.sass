@@ -1,2 +1,98 @@
 .signup
-  
+  padding-top: 120px
+  padding-bottom: 70px
+  // min-height: 100vh
+  background: $colorBlue
+  &__container
+    margin: 50px auto 0px
+    max-width: 615px
+  &__form
+    background: white
+    padding: 40px 40px 20px
+    &-cta
+      max-width: 350px
+      margin-left: auto
+      margin-top: 15px
+
+
+.captcha
+  max-width: 350px
+  margin-left: auto
+  size: 310px 89px
+  background: $lightBg
+
+
+.signup-nav
+  margin: 20px 0
+  &__wrapper
+    display: flex
+    justify-content: center
+  &__el
+    flex: 0 1 auto
+    color: white
+    display: flex
+    flex-direction: column
+    align-items: center
+    &:first-child
+      .signup-nav__number
+        &::before
+          display: none
+    &:last-child
+      .signup-nav__number
+        &::after
+          display: none
+    &.is-active
+      .signup-nav
+        &__number
+          &::after
+            background-color: $colorYellow
+          span
+            background: $colorYellow
+            border-color: $colorYellow
+            color: white
+        &__name
+          color: $colorYellow
+
+      + .signup-nav__el
+        .signup-nav__number
+          &::before
+            background-color: $colorYellow
+
+  &__number
+    position: relative
+    padding-left: 75px
+    padding-right: 75px
+    span
+      display: inline-block
+      position: relative
+      z-index: 2
+      size: 36px
+      background: #EDEDED
+      border: 3px solid #FFFFFF
+      border-radius: 50%
+      display: flex
+      align-items: center
+      justify-content: center
+      color: #888B8B
+      transition: .25s $ease
+    &::before, &::after
+      display: inline-block
+      content: ' '
+      position: absolute
+      z-index: 1
+      top: 50%
+      transform: translateY(-50%)
+      height: 3px
+      background: #EDEDED
+      width: 75px
+    &::before
+      left: 0px
+    &::after
+      right: 0px
+
+  &__name
+    text-align: center
+    color: #F9F9F9
+    font-size: 14px
+    margin-top: 10px
+    font-family: $varelaFamily

@@ -1,10 +1,11 @@
 .header
-  position: fixed
+  position: absolute
   left: 0
   right: 0
   top: 0
   z-index: 9
-  background: white
+  background: $colorBlue
+  color: white
   transition: box-shadow .25s $ease
   &__wrapper
     display: flex
@@ -13,94 +14,20 @@
     transition: padding .25s $ease
 
   &__logo
+    flex: 0 0 auto
+    padding-right: 40px
     font-size: 0
-
-  &__phone
-    display: inline-block
-    border-left: 1px solid #979797
-    margin-left: 27px
-    padding-left: 27px
-    font-size: 11px
-    color: $fontColor
-    font-weight: 500
-    line-height: 1.45
-    // transform: translateY(4px)
-    transition: opacity .25s $ease
-    > span
-      display: inline-block
-      transform: translateY(1px)
-    &-tel
-      display: block
-      color: $colorBlue
-      transition: .25s $ease
-      span
-        color: $fontColor
-    &:hover
-      .header__phone-tel
-        color: $colorGreen
-
-  &__menu
-    margin: 0 0 0 auto
-    padding: 0
-    color: $fontColorGray
-    font-size: 13px
-    opacity: 1
-    transition: opacity .25s $ease
-    > li
-      position: relative
-      margin-right: 60px
-      .ico-select-arrow
-        font-size: 5px
-        color: $fontColorGray
-        transform: translateY(-1px)
-        transition: transform .25s $ease
-      &:last-child
-        margin-right: 0
-      > a:not(.btn)
-        display: inline-block
-        padding: 10px
-        transition: color .25s $ease
-        &.is-active, &:hover
-          // color: $fontColor
-          color: $colorBlue
-        &.is-active
-          font-weight: 500
-      &:hover
-        .ico-select-arrow
-          transform: translateY(-1px) rotate(180deg)
-        .header__menu-second
-          opacity: 1
-          pointer-events: all
-          transform: translate(0,0)
-      .header__menu-second
-        position: absolute
-        // top: 61px
-        top: 0
-        left: -33px
-        min-width: 190px
-        opacity: 0
-        pointer-events: none
-        transform: translate(0,-10px)
-        transition: .25s $ease
-      ul
-        background-color: #ffffff
-        box-shadow: 0 9px 30px 0 rgba(0, 0, 0, 0.05)
-        margin: 61px 0 0 auto
-        padding: 10px 20px 10px 28px
-        transition: .25s $ease
-        li
-          display: block
-          margin-bottom: 3px
-          &:last-child
-            margin-bottom: 0
-        a
-          display: inline-block
-          padding: 5px
-          transition: color .25s $ease
-          &.is-active, &:hover
-            color: $colorBlue
-          &.is-active
-            font-weight: 500
+    color: $colorYellow
+    .ico
+      font-size: 72px
+    // font-family: $varelaFamily
+    // font-size: 38px
+    // line-height: .81
+    // span
+    //   font-size: 46px
+    //   display: block
+    //   text-transform: uppercase
+    //   line-height: .67
 
   &__hamburger
     display: none
@@ -123,122 +50,21 @@
 
 .is-scrolled:not(.header--logo-only)
   .header
-    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.05)
-    &__wrapper
-      padding: 15px 0
-    &__menu
-      > li
-        ul
-          margin-top: 49px
 
-  .mobile-navi
-    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.05)
 
 +r($desktop)
   .header
-    &__menu
-      /* hide all
-      display: none
-      // li
-      //   display: none
-      //   &:last-child
-      //     display: block
     &__hamburger
       margin-left: auto
-      display: block
+      // display: block
 
 +r($mobile)
   .header
     &__wrapper
       padding: 23px 0
     &__logo
-      max-width: 90px
-      .icon
-        transform: scale(.8)
-        transform-origin: left center
-    &__phone
-      margin-left: 20px
-      padding-left: 15px
-      // transform: translateY(2px)
 
-    // &__menu
-    //   display: none
-    // &__hamburger
-    //   margin-left: auto
+    &__phone
 
 +r(414)
   .header
-    &__phone
-      &-tel
-        span
-          display: none
-
-/* MOBILE NAVI
-.mobile-navi
-  display: none
-  position: fixed
-  top: 0
-  left: 0
-  right: 0
-  z-index: 8
-  background: white
-  opacity: 0
-  pointer-events: none
-  transform: translate(0,-100%)
-  transition: .25s $ease
-  &.is-active
-    opacity: 1
-    transform: translate(0,0)
-    pointer-events: all
-  &__wrapper
-    padding: 100px 8px 30px
-  &__menu
-    margin: 0 0 0 auto
-    padding: 0
-    color: $fontColorGray
-    font-size: 16px
-    opacity: 1
-    transition: opacity .25s $ease
-    > li
-      display: block
-      margin-bottom: 20px
-      &:last-child
-        margin-bottom: 0
-      a:not(.btn)
-        display: inline-block
-        padding: 10px
-        margin-left: -10px
-        transition: color .25s $ease
-        &.is-active, &:hover
-          color: $colorBlue
-        &.is-active
-          font-weight: 500
-      a.btn
-        display: none
-        font-size: 13px
-        padding: 21px 40px 19px
-        width: 100%
-        max-width: 290px
-      ul
-        margin: 10px 0 0 15px
-        padding: 0
-        li
-          display: block
-        a
-          font-size: 14px
-          padding-top: 7px
-          padding-bottom: 7px
-
-+r($desktop)
-  .mobile-navi
-    display: block
-    &__menu
-      li
-        a.btn
-          display: block
-+r($mobile)
-  .mobile-navi
-    // &__menu
-    //   li
-    //     a.btn
-    //       display: block

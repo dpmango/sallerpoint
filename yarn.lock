@@ -3750,6 +3750,10 @@ forever-agent@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
 
+form-data-to-object@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/form-data-to-object/-/form-data-to-object-0.2.0.tgz#f7a8e68ddd910a1100a65e25ac6a484143ff8168"
+
 form-data@~2.1.1:
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.1.4.tgz#33c183acf193276ecaa98143a69e94bfee1750d1"
@@ -3765,6 +3769,13 @@ form-data@~2.3.1:
     asynckit "^0.4.0"
     combined-stream "1.0.6"
     mime-types "^2.1.12"
+
+formsy-react@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/formsy-react/-/formsy-react-1.1.4.tgz#687525cbcaa6f6a6000e0c8029076fb5ac8dac3e"
+  dependencies:
+    form-data-to-object "^0.2.0"
+    prop-types "^15.5.10"
 
 forwarded@~0.1.2:
   version "0.1.2"
@@ -7952,7 +7963,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.0, prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
+prop-types@^15.5.0, prop-types@^15.5.10, prop-types@^15.5.6, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   dependencies:
@@ -8247,6 +8258,12 @@ react-snap@^1.17.0:
     puppeteer "^1.4.0"
     serve-static "1.13.2"
     sourcemapped-stacktrace-node "2.1.8"
+
+react-text-mask@^5.4.3:
+  version "5.4.3"
+  resolved "https://registry.yarnpkg.com/react-text-mask/-/react-text-mask-5.4.3.tgz#991efb4299e30c2e6c2c46d13f617169463e0d2d"
+  dependencies:
+    prop-types "^15.5.6"
 
 react@^16.4.1:
   version "16.4.1"

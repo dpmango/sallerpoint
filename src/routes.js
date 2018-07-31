@@ -10,6 +10,11 @@ function MyLoadable(opts) {
   }, opts));
 };
 
+export const Home = MyLoadable({
+  loader: () => import("./pages/Home"),
+  modules: ['./pages/Home'],
+  webpack: () => [require.resolveWeak('./pages/Home')]
+});
 export const Dashboard = MyLoadable({
   loader: () => import("./pages/Dashboard"),
   modules: ['./pages/Dashboard'],
@@ -34,26 +39,28 @@ export const NotFound = MyLoadable({
 
 export const routes = [
   {
-    forNavBar: true,
     isExact: true,
     path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    isExact: true,
+    path: '/login',
     name: 'Login',
     component: Login
   },
   {
-    forNavBar: true,
     path: '/signup',
     name: 'Signup',
     component: Signup
   },
   {
-    forNavBar: true,
     path: '/dash',
     name: 'Dashboard',
     component: Dashboard
   },
   {
-    forNavBar: false,
     path: '',
     component: NotFound
   },

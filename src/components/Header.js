@@ -77,18 +77,11 @@ class Header extends React.Component {
     return(
       <div className={this.props.stateClass + (this.state.isScrolled ? ' is-scrolled' : '')}>
         <header className='header'>
-          <div className="container">
+          <div className="container container--full">
             <div className="header__wrapper">
               <NavLink onClick={this.closeHamburger} to='/' className="header__logo">
-                <i className="icon icon-cabin-logo" />
+                <SvgIcon name="logo" />
               </NavLink>
-              <ul className="header__menu">
-                {routes.map((route, i) =>
-                  <li key={i}>
-                    <NavLink onMouseOver={this.preloaderOnHover.bind(this, route.component)} onClick={this.closeHamburger} exact={route.isExact} className={route.navBarClass} activeClassName='is-active' to={route.path}>{route.name}</NavLink>
-                  </li>
-                )}
-              </ul>
               <div className="header__hamburger">
                 <div
                   className={"hamburger hamburger--squeeze " + (menuOpened ? "is-active" : "" ) }
@@ -102,21 +95,6 @@ class Header extends React.Component {
             </div>
           </div>
         </header>
-
-        <div className={"mobile-navi " + (menuOpened ? "is-active" : "" ) }>
-          <div className="container">
-            <div className="mobile-navi__wrapper">
-              <ul className="mobile-navi__menu">
-                {routes.map(route =>
-                  <li key={route.path}>
-                    <NavLink onMouseOver={this.preloaderOnHover.bind(this, route.component)} onClick={this.closeHamburger} exact={route.isExact} className={route.navBarClass} activeClassName='is-active' to={route.path}>{route.name}</NavLink>
-                  </li>
-                )}
-              </ul>
-            </div>
-          </div>
-
-        </div>
       </div>
     )
   }
