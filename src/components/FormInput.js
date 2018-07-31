@@ -43,10 +43,11 @@ class FormInput extends Component {
         </div>
       )
     } else {
+      console.log(isRequired())
       return(
         <div className={parentClass + (label ? " ui-group--labeled" : "")}>
           <label htmlFor={name}>
-            {isRequired ? '*' : false}
+            {isRequired() ? '*' : ""}
             {label}
           </label>
           <input
@@ -55,7 +56,7 @@ class FormInput extends Component {
             placeholder={placeholder}
             onChange={this.changeValue}
             value={this.props.getValue() || ''}
-            // required={isRequired ? true : false}
+            // required={isRequired() ? true : false}
           />
           <span className="ui-input-validation">{errorMessage}</span>
         </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Formsy from 'formsy-react';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 import { setSignupStep } from '../actions/signup';
 
@@ -40,9 +41,15 @@ class SignupStep1 extends Component {
     this.setState({ formIsValid: true });
   }
 
+  recaptchaVerify = (response) => {
+    this.setState({
+      captcha: response
+    })
+  }
+
   // submit handler from the form
   handleSubmit = (e) => {
-    if ( this.state.formIsValid ){
+    if ( this.state.formIsValid && this.state.captcha ){
       this.nextStep();
     }
   }
@@ -65,7 +72,7 @@ class SignupStep1 extends Component {
 
 
   render(){
-    const { first_name, last_name, company_name, email, phone, password, isTransitioningNext } = this.state;
+    const { first_name, last_name, company_name, email, phone, password, password_confirmation, isTransitioningNext } = this.state;
 
     return(
       <div className="signup__container">
@@ -128,14 +135,13 @@ class SignupStep1 extends Component {
           />
           <FormInput
             name="phone"
-            label="Phone"
+            label="Phone Number"
             placeholder="Phone"
             value={phone}
             onChangeHandler={this.handleChange}
             validationErrors={{
               isDefaultRequiredValue: 'Please fill phone'
             }}
-            required
           />
           { /* <FormInput
             name="phone"
@@ -156,7 +162,7 @@ class SignupStep1 extends Component {
           <FormInput
             name="password"
             label="Password"
-            placeholder="Password"
+            placeholder=""
             value={password}
             onChangeHandler={this.handleChange}
             validationErrors={{
@@ -164,9 +170,29 @@ class SignupStep1 extends Component {
             }}
             required
           />
-          <div className="captcha">Captcha</div>
+          <FormInput
+            name="password_confirmation"
+            label="Confirm Password"
+            placeholder=""
+            value={password_confirmation}
+            onChangeHandler={this.handleChange}
+            validationErrors={{
+              isDefaultRequiredValue: 'Please fill password'
+            }}
+            required
+          />
+          <div className="signup__captcha">
+            <ReCAPTCHA
+              sitekey="6LfbfWcUAAAAAIjvp3Ww33D8LFDQBndWhjX9mkl2"
+              render="explicit"
+              onChange={this.recaptchaVerify}
+            />
+          </div>
+          <div className="signup__rules">
+          By signing up, you are agreeing to KiniMetrix’s <br/><a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
+          </div>
           <div className="signup__form-cta">
-            <button onclick={this.submitForm} className="btn btn-signup btn--block">Sign Up</button>
+            <button onClick={this.submitForm} className="btn btn-signup btn--block">Sign Up</button>
           </div>
         </Formsy>
       </div>
