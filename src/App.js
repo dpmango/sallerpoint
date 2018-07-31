@@ -1,19 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+import { routes } from './routes';
+import svg4everybody from 'svg4everybody';
+
+import RenderSwitch from './Switch';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 class App extends Component {
+
+  componentDidMount(){
+    require('viewport-units-buggyfill').init({
+      force: false,
+      refreshDebounceWait: 150
+    });
+
+    svg4everybody();
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <BrowserRouter>
+        <div className="page">
+          <Header routes={routes.filter(route => route.forNavBar)}/>
+            <div className="page__content">
+              <RenderSwitch />
+            </div>
+          <Footer />
+        </div>
+      </BrowserRouter>
     );
   }
 }

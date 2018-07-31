@@ -1,0 +1,69 @@
+
+.loader
+  position: fixed 0
+  z-index: 99
+  background: rgba(white, .5)
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-direction: column
+  // opacity: 0
+  // pointer-events: none
+  transition: opacity .25s $ease
+  &__desc
+    text-align: center
+    font-size: 16px
+    line-height: 1.7
+    margin-top: 20px
+    a
+      cursor: pointer
+      color: $colorGreen
+      transition: .25s $ease
+      &:hover
+        color: $colorBlue
+
+  // &.is-active
+  //   opacity: 1
+  //   pointer-events: all
+
+.preloader-dots
+  display: flex
+  justify-content: space-between
+  flex-wrap: wrap
+  width: 32px
+  font-size: 0
+  transform: rotate(45deg)
+  .dot
+    display: inline-block
+    size: 12px
+    border-radius: 50%
+    margin-bottom: 8px
+    margin-right: 8px
+    background: #F5F6FA
+    animation-name: preloaderColor
+    animation-timing-function: linear
+    animation-duration: 1s
+    animation-iteration-count: infinite
+    &:nth-child(1)
+      background-color: $colorBlue
+    &:nth-child(2)
+      animation-delay: .25s
+    /* 4 - 3 is changed for clokwise vs blocks position
+    &:nth-child(4)
+      animation-delay: .5s
+      margin-bottom: 0
+    &:nth-child(3)
+      animation-delay: .75s
+      margin-bottom: 0
+    &:nth-child(even)
+      margin-right: 0
+
+@keyframes preloaderColor
+  0%
+    background-color: #F5F6FA
+  25%
+    background-color: $colorBlue
+  40%
+    background-color: #F5F6FA
+  100%
+    background-color: #F5F6FA

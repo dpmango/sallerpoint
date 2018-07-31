@@ -1,8 +1,24 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import {hydrate, render} from 'react-dom';
+import { Provider } from 'react-redux';
+import store from './store/store';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import './css/app.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+// hyndrate is a method for react-snap for a simple Server side rendering=
+const rootElement = document.getElementById('root');
+if ( rootElement.hasChildNodes() ){
+  hydrate(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    rootElement
+  );
+} else{
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    rootElement
+  )
+}

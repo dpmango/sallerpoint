@@ -1,0 +1,498 @@
+/**
+ * React Select
+ * ============
+ * Created by Jed Watson and Joss Mackison for KeystoneJS, http://www.keystonejs.com/
+ * https://twitter.com/jedwatson https://twitter.com/jossmackison https://twitter.com/keystonejs
+ * MIT License: https://github.com/JedWatson/react-select
+
+.Select
+  position: relative
+  display: block
+  width: 100%
+  font-family: BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, Roboto, sans-serif
+  input
+    &::-webkit-contacts-auto-fill-button, &::-webkit-credentials-auto-fill-button, &::-ms-clear, &::-ms-reveal
+      display: none !important
+  box-sizing: border-box
+  div, input, span
+    box-sizing: border-box
+  &.is-disabled
+    .Select-arrow-zone
+      cursor: default
+      pointer-events: none
+      opacity: 0.35
+    > .Select-control
+      background-color: #f9f9f9
+      &:hover
+        box-shadow: none
+  &.is-open > .Select-control
+    border-bottom-right-radius: 0
+    border-bottom-left-radius: 0
+    background: #fff
+    // border-color: #b3b3b3 #ccc #d9d9d9
+    // border-color: $colorBlue
+    border-color: rgba($fontColorGray, .5)
+    box-shadow: 0 4px 10px 0 rgba(0,0,0,0.05)
+    .Select-arrow
+      transform: rotate(180deg) translateY(-50%)
+      // top: -2px
+      // border-color: transparent transparent $fontColorGray
+      // border-width: 0 5px 5px
+  &.is-searchable
+    &.is-open > .Select-control, &.is-focused:not(.is-open) > .Select-control
+      cursor: text
+  &.is-focused
+    > .Select-control
+      background: #fff
+    &:not(.is-open) > .Select-control
+      // border-color: #007eff
+      // box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px rgba(0, 126, 255, 0.1)
+      background: #fff
+  &.has-value
+    &.is-clearable.Select--single > .Select-control .Select-value
+      padding-right: 42px
+    &.Select--single > .Select-control .Select-value .Select-value-label, &.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label
+      color: $fontColorGray
+    &.Select--single > .Select-control .Select-value a.Select-value-label, &.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label
+      cursor: pointer
+      text-decoration: none
+    &.Select--single > .Select-control .Select-value a.Select-value-label:hover, &.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:hover, &.Select--single > .Select-control .Select-value a.Select-value-label:focus, &.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:focus
+      // color: #007eff
+      outline: none
+      text-decoration: underline
+    &.Select--single > .Select-control .Select-value a.Select-value-label:focus
+      background: #fff
+    &.is-pseudo-focused
+      &.Select--single > .Select-control .Select-value a.Select-value-label:focus
+        background: #fff
+      .Select-input
+        opacity: 0
+  &.is-open .Select-arrow, .Select-arrow-zone:hover > .Select-arrow
+    // border-top-color: #666
+  &.Select--rtl
+    direction: rtl
+    text-align: right
+
+.Select-control
+  background-color: #fff
+  border-radius: 3px
+  border: 1px solid rgba($fontColorGray, .5)
+  color: $fontColorGray
+  cursor: default
+  display: table
+  border-spacing: 0
+  border-collapse: separate
+  height: auto
+  outline: none
+  overflow: hidden
+  position: relative
+  width: 100%
+  z-index: 2
+  transition: .25s $ease
+  &:hover
+    // box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06)
+  .Select-input:focus
+    outline: none
+    background: #fff
+
+.Select-placeholder, .Select--single > .Select-control .Select-value
+  bottom: 0
+  color: $fontColorGray
+  left: 0
+  font-size: 14px
+  line-height: 1
+  padding-top: 25px
+  padding-bottom: 25px
+  padding-left: 15px
+  padding-right: 25px
+  position: absolute
+  right: 0
+  top: 0
+  max-width: 100%
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+
+.Select-placeholder
+  color: rgba($fontColorGray, .5)
+
+.Select-input
+  height: 63px
+  width: 100%
+  font-size: 14px
+  line-height: 63px
+  padding-left: 15px
+  padding-right: 15px
+  vertical-align: middle
+  display: block
+  > input
+    width: 100%
+    background: none transparent
+    border: 0 none
+    box-shadow: none
+    cursor: default
+    display: inline-block
+    font-family: inherit
+    font-size: inherit
+    margin: 0
+    outline: none
+    line-height: 17px
+    /* For IE 8 compatibility
+    padding: 8px 0 12px
+    /* For IE 8 compatibility
+    -webkit-appearance: none
+
+.is-focused .Select-input > input
+  cursor: text
+
+.has-value.is-pseudo-focused .Select-input
+  opacity: 0
+
+.Select-control:not(.is-searchable) > .Select-input
+  outline: none
+
+.Select-loading-zone
+  cursor: pointer
+  display: table-cell
+  position: relative
+  text-align: center
+  vertical-align: middle
+  width: 16px
+
+.Select-loading
+  animation: Select-animation-spin 400ms infinite linear
+  width: 16px
+  height: 16px
+  box-sizing: border-box
+  border-radius: 50%
+  border: 2px solid #ccc
+  border-right-color: $fontColorGray
+  display: inline-block
+  position: relative
+  vertical-align: middle
+
+.Select-clear-zone
+  display: none !important
+  animation: Select-animation-fadeIn 200ms
+  color: $fontColorGray
+  cursor: pointer
+  display: table-cell
+  position: relative
+  text-align: center
+  vertical-align: middle
+  width: 17px
+  &:hover
+    color: #D0021B
+
+.Select-clear
+  display: inline-block
+  font-size: 18px
+  line-height: 1
+
+.Select--multi .Select-clear-zone
+  width: 17px
+
+.Select-arrow-zone
+  position: relative
+  cursor: pointer
+  display: table-cell
+  position: relative
+  text-align: center
+  vertical-align: middle
+  width: 35px
+  padding-right: 5px
+
+.Select--rtl .Select-arrow-zone
+  padding-right: 0
+  padding-left: 5px
+
+.Select-arrow
+  position: absolute
+  top: 50%
+  right: 15px
+  size: 10px 5px
+  background: svg-load('../images/icons/select-arrow.svg')
+  // border-color: $fontColorGray transparent transparent
+  // border-style: solid
+  // border-width: 5px 5px 2.5px
+  // display: inline-block
+  // height: 0
+  // width: 0
+  // position: relative
+  transform: translateY(-50%)
+  transform-origin: top center
+  transition: .25s $ease
+
+.Select-control > *:last-child
+  padding-right: 10px
+
+.Select--multi .Select-multi-value-wrapper
+  display: inline-block
+
+.Select .Select-aria-only
+  position: absolute
+  display: inline-block
+  height: 1px
+  width: 1px
+  margin: -1px
+  clip: rect(0, 0, 0, 0)
+  overflow: hidden
+  float: left
+
+@keyframes Select-animation-fadeIn
+  from
+    opacity: 0
+
+  to
+    opacity: 1
+
+
+.Select-menu-outer
+  border-bottom-right-radius: 3px
+  border-bottom-left-radius: 3px
+  background-color: #fff
+  border: 1px solid rgba($fontColorGray, .5)
+  // changed from border color $colorBlue
+  // border-top-color: #e6e6e6
+  border-top-color: transparent
+  // box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06)
+  box-sizing: border-box
+  margin-top: -1px
+  max-height: 227px
+  position: absolute
+  left: 0
+  top: 100%
+  width: 100%
+  z-index: 1
+  -webkit-overflow-scrolling: touch
+  box-shadow: 0 0 30px 0 rgba(0,0,0,0.05)
+
+.Select-menu
+  max-height: 225px
+  overflow-y: auto
+  &::-webkit-scrollbar
+    width: 7px
+    position: absolute
+    top: 0
+    bottom: 0
+    right: 0
+
+  /* Track
+
+  &::-webkit-scrollbar-track
+    // -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3)
+    background: transparent
+    border-radius: 5px
+
+  /* Handle
+
+  &::-webkit-scrollbar-thumb
+    border-radius: 5px
+    background: rgba(black, 0.4)
+    // -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5)
+    &:window-inactive
+      background: rgba(black, 0.2)
+
+.Select-option
+  box-sizing: border-box
+  background-color: #fff
+  color: $fontColorGray
+  cursor: pointer
+  display: block
+  font-size: 13px
+  font-weight: 500
+  // padding: 10px 15px
+  padding: 18px 18px
+  color: $fontColorGray
+  transition: .25s $ease
+  &:last-child
+    border-bottom-right-radius: 3px
+    border-bottom-left-radius: 3px
+  &.is-selected
+    background-color: $colorBlue
+    color: white
+    // background-color: rgba($colorBlue, 0.04)
+    // color: $fontColorGray
+  &.is-focused:not(.is-selected)
+    background-color: rgba($fontColorGray, 0.1)
+    color: $fontColorGray
+  &.is-disabled
+    color: rgba($fontColorGray, .5)
+    cursor: default
+
+.Select-noresults
+  box-sizing: border-box
+  color: $fontColorGray
+  cursor: default
+  display: block
+  font-size: 14px
+  padding: 15px 15px
+
+.Select--multi
+  .Select-input
+    vertical-align: middle
+    margin-left: 10px
+    padding: 0
+  &.Select--rtl .Select-input
+    margin-left: 0
+    margin-right: 10px
+  &.has-value .Select-input
+    margin-left: 5px
+  .Select-value
+    background-color: #ebf5ff
+    background-color: rgba(0, 126, 255, 0.08)
+    border-radius: 2px
+    border: 1px solid #c2e0ff
+    border: 1px solid rgba(0, 126, 255, 0.24)
+    color: #007eff
+    display: inline-block
+    font-size: 14px
+    line-height: 1.4
+    margin-left: 5px
+    margin-top: 5px
+    vertical-align: top
+  .Select-value-icon
+    display: inline-block
+    vertical-align: middle
+  .Select-value-label
+    display: inline-block
+    vertical-align: middle
+    border-bottom-right-radius: 2px
+    border-top-right-radius: 2px
+    cursor: default
+    padding: 2px 5px
+    font-size: 14px
+  a.Select-value-label
+    color: #007eff
+    cursor: pointer
+    text-decoration: none
+    &:hover
+      text-decoration: underline
+  .Select-value-icon
+    cursor: pointer
+    border-bottom-left-radius: 2px
+    border-top-left-radius: 2px
+    border-right: 1px solid #c2e0ff
+    /* Fallback color for IE 8
+    border-right: 1px solid rgba(0, 126, 255, 0.24)
+    padding: 1px 5px 3px
+    &:hover, &:focus
+      background-color: #d8eafd
+      /* Fallback color for IE 8
+      background-color: rgba(0, 113, 230, 0.08)
+      color: #0071e6
+    &:active
+      background-color: #c2e0ff
+      /* Fallback color for IE 8
+      background-color: rgba(0, 126, 255, 0.24)
+  &.Select--rtl
+    .Select-value
+      margin-left: 0
+      margin-right: 5px
+    .Select-value-icon
+      border-right: none
+      border-left: 1px solid #c2e0ff
+      /* Fallback color for IE 8
+      border-left: 1px solid rgba(0, 126, 255, 0.24)
+  &.is-disabled
+    .Select-value
+      background-color: #fcfcfc
+      border: 1px solid #e3e3e3
+      color: $fontColorGray
+    .Select-value-icon
+      cursor: not-allowed
+      border-right: 1px solid #e3e3e3
+      &:hover, &:focus, &:active
+        background-color: #fcfcfc
+
+@keyframes Select-animation-spin
+  to
+    transform: rotate(1turn)
+
+
++r($mobile)
+  /* move default padding to 10px on mobile
+
+  .Select-placeholder,
+  .Select--single > .Select-control .Select-value
+    padding-left: 10px
+
+  .Select-input
+    padding-left: 10px
+    > input
+      padding-left: 0
+
+  .Select-option
+    padding-left: 10px
+    padding-right: 10px
+
+  .Select-noresults
+    padding-left: 10px
+    padding-right: 10px
+
+/* Modifier classes
+.Select.Select-white
+  .Select-control
+    border-color: transparent !important
+    box-shadow: 0 0 30px 0 rgba(0,0,0,0.05)
+    border-radius: 3px
+    z-index: 2
+
+  .Select-value
+    color: $colorBlue
+    font-size: 13px
+    font-weight: 500
+    padding-top: 22px
+    padding-bottom: 22px
+    padding-left: 30px
+  &.Select.has-value.Select--single > .Select-control .Select-value .Select-value-label,
+  &.Select.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label
+    color: $colorBlue
+  .Select-input
+    height: 57px
+    font-size: 13px
+    line-height: 57px
+    padding-left: 30px
+    > input
+      padding-left: 0
+
+  .Select-menu-outer
+    border: 1px solid transparent
+    border-top-color: transparent
+    box-shadow: 0 0 30px 0 rgba(0,0,0,0.05)
+
+
+  .Select-option
+    background-color: #fff
+    // font-size: 13px
+    // font-weight: 500
+    padding: 18px 30px
+    &.is-selected
+      background-color: white
+      color: $colorBlue
+      font-weight: 500
+    &.is-focused:not(.is-selected)
+      // background-color: rgba($fontColorGray, 0.05)
+
+
+  .Select-noresults
+    font-size: 13px
+    font-weight: 500
+    padding: 15px 30px
+
+.Select.Select--small
+  .Select-value
+    color: $fontColorGray
+    font-size: 10px
+    font-weight: 500
+    padding-top: 11px
+    padding-bottom: 11px
+    padding-left: 20px
+  .Select-input
+    height: 34px
+    font-size: 10px
+    line-height: 34px
+    padding-left: 20px
+  .Select-option
+    padding: 12px 20px
+    font-size: 10px

@@ -1,0 +1,249 @@
+.ui-group
+  position: relative
+  margin-bottom: 35px
+  /* required as a fix for react-select dropdown
+  /* because of shadow fromt .Select-control on top of dropdown
+  &:nth-child(1)
+    z-index: 5
+  &:nth-child(2)
+    z-index: 4
+  &:nth-child(3)
+    z-index: 3
+  &:nth-child(4)
+    z-index: 2
+  &:nth-child(5)
+    z-index: 1
+
+  > label
+    display: block
+    font-size: 16px
+    color: $fontColorGray
+    line-height: 1.85
+  &--labeled
+    > label
+      margin-bottom: 7px
+  > input
+    -webkit-appearance: none
+    display: block
+    font-family: $systemFamily
+    width: 100%
+    height: auto
+    background: white
+    border-radius: 3px
+    border: 1px solid rgba($fontColorGray, .5)
+    font-size: 14px
+    line-height: 2
+    color: $fontColorGray
+    box-shadow: none
+    padding: 17px 15px
+    transition: .25s $ease
+    &::placeholder
+      color: rgba($fontColorGray, .5)
+    &:focus
+      border-color: $colorBlue
+  &.has-error
+    input, textarea
+      border-color: $colorRed
+
+
++r($mobile)
+  .ui-group
+    > input
+      padding-left: 10px
+
+.ui-input-validation
+  position: absolute
+  bottom: -20px
+  left: 0
+  color: tomato
+  // margin-top: 10px
+  font-size: 13px
+  text-align: left
+
+.ui-group-validation
+  position: absolute
+  top: -45px
+  left: 0
+  // margin-top: 20px
+  color: tomato
+  // margin-top: 10px
+  font-size: 13px
+  text-align: left
+
+.ui-validation-status
+  position: absolute
+  size: 6px
+  right: 10px
+  border-radius: 50%
+  top: 27px
+  &.green
+    background: $colorGreen
+  &.red
+    background: $colorRed
+
+
+.ui-phone
+  display: block
+  font-family: $systemFamily
+  width: 100%
+  height: auto
+  background: white
+  border-radius: 3px
+  border: 1px solid rgba($fontColorGray, .5)
+  font-size: 14px
+  line-height: 2
+  color: $fontColorGray
+  box-shadow: none
+  padding: 0px 15px 0px
+  transition: .25s $ease
+  .rrui__input
+    height: auto
+  .rrui__input-field
+    font-size: 14px
+    font-family: $systemFamily
+    line-height: 2
+    padding: 17px 0px 17px
+  .rrui__select
+    padding-bottom: 2px
+    .rrui__input
+      // font-size: 0
+      line-height: 0
+      height: 15px
+    &--expanded
+      // padding-bottom: 40px
+      .rrui__input
+        height: auto
+      .rrui__input-field
+        padding: 17px 0px 15px
+  .react-phone-number-input__country.rrui__select--collapsed
+    margin-right: 15px
+  .rrui__select__options:not(.rrui__select__options--menu)
+    width: calc(100% + 32px)
+    left: -16px
+    right: -16px
+    // top: 5px
+  .rrui__expandable__content
+    display: block
+  .rrui__select__option
+    padding: 13px 15px
+    color: $fontColorGray
+    font-size: 13px
+    font-weight: 500
+    transition: .15s $ease
+    &:hover
+      background-color: rgba($fontColorGray, 0.1)
+      color: $fontColorGray
+    &--focused
+      background-color: $colorBlue
+      color: white
+      &:hover
+        background-color: $colorBlue
+        color: white
+
+  .rrui__select__options
+    border-bottom-right-radius: 3px
+    border-bottom-left-radius: 3px
+    z-index: 1
+    border: 1px solid rgba($fontColorGray, .5)
+
+  .rrui__shadow
+    box-shadow: 0 0 30px 0 rgba(0,0,0,0.05)
+
+  /* refactored shadow
+  .rrui__select--expanded
+    .rrui__input
+      &::after
+        display: inline-block
+        content: ' '
+        position: absolute
+        left: -15px
+        right: -15px
+        bottom: 0
+        top: 0
+        // height: 30px
+        z-index: 2
+        // box-shadow: 0 0 30px 0 rgba(0,0,0,0.05)
+        box-shadow: 0 4px 10px 0 rgba(0,0,0,0.05)
+
+
+// Checkbox
+.ui-checkbox
+  input
+    display: none
+    width: 0.1px
+    height: 0.1px
+    opacity: 0
+    position: absolute
+    top: 0
+    left: 0
+  &.is-active
+    .ui-checkbox__label
+      &::before
+        // border-color: $colorBlue
+      &::after
+        transform: translateY(-50%) scale(1)
+  &__label
+    display: flex
+    align-items: center
+    width: 100%
+    min-height: 30px
+    position: relative
+    cursor: pointer
+    &::before
+      position: absolute
+      left: 0
+      top: 50%
+      transform: translateY(-50%)
+      display: inline-block
+      content: ' '
+      size: 20px
+      background-color: white
+      border: 1px solid rgba($fontColorGray, .5)
+      border-radius: 3px
+      cursor: pointer
+      vertical-align: middle
+      cursor: pointer
+      transition: all $transitionSpeed ease-in-out
+    &::after
+      position: absolute
+      left: 5px
+      top: 50%
+      transform: translateY(-50%) scale(0)
+      display: inline-block
+      content: ' '
+      size: 12px
+      background: $colorBlue
+      // border-radius: 50%
+      transition: transform .2s ease
+    span
+      display: inline-block
+      padding-left: 35px
+      padding-top: 3px
+      vertical-align: top
+      line-height: 1.27
+      font-size: 16px
+      cursor: pointer
+      color: $fontColorGray
+      transition: .25s $ease
+    &:hover
+      span
+        color: $colorBlue
+
+.has-error
+  .ui-checkbox
+    &__label
+      &::before
+        border-color: tomato
+    &.is-active
+      .ui-checkbox__label
+        &::before
+          border-color: rgba($fontColorGray, .5)
+  .DateInput_input
+    border-color: tomato
+  .Select-control
+    border-color: tomato
+
+  // reset for focused
+  .is-focused
+    .DateInput_input
+      border-color: #2F417C

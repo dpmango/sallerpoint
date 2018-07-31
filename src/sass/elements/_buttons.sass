@@ -1,0 +1,25 @@
+// buttons
+button
+  display: inline-block
+  -webkit-appearance: none
+  border: 0
+  box-shadow: none
+  &:focus
+    outline: none
+
+.btn
+  display: inline-block
+  position: relative
+  text-align: center
+  cursor: pointer
+  background: $colorBlue
+  color: white
+  border-radius: 3px
+  line-height: 1
+  font-weight: 500
+  transition: .25s $ease
+  &:focus, &:active
+    outline: none
+  &--block
+    display: block
+    width: 100%

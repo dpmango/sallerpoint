@@ -9,6 +9,14 @@
 # production
 /build
 
+# css build
+/src/css
+
+*.zip
+
+.env
+dploy.yaml
+
 # misc
 .DS_Store
 .env.local
