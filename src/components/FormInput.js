@@ -43,7 +43,6 @@ class FormInput extends Component {
         </div>
       )
     } else {
-      console.log(isRequired())
       return(
         <div className={parentClass + (label ? " ui-group--labeled" : "")}>
           <label htmlFor={name}>

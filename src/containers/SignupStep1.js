@@ -7,6 +7,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { setSignupStep } from '../actions/signup';
 
 import FormInput from '../components/FormInput';
+import PassMeter from '../components/PassMeter';
 
 class SignupStep1 extends Component {
   static propTypes = {
@@ -62,8 +63,9 @@ class SignupStep1 extends Component {
   handleChange = (e) => {
     let fieldName = e.target.name;
     let fleldVal = e.target.value;
-    this.setState({...this.state, [fieldName]: fleldVal})
+    this.setState({...this.state, [fieldName]: fleldVal});
   }
+
 
   nextStep = () => {
     const { first_name, last_name, company_name, email, phone } = this.state;
@@ -170,6 +172,8 @@ class SignupStep1 extends Component {
             }}
             required
           />
+          <PassMeter password={password} />
+
           <FormInput
             name="password_confirmation"
             label="Confirm Password"

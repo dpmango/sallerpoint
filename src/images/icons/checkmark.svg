@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="9px" viewBox="0 0 10 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.2 (51160) - http://www.bohemiancoding.com/sketch -->
+    <title>checkmark</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="9.23121533 0.000205547653 8.44888379e-05 0.000205547653 8.44888379e-05 8.15345875 9.23121533 8.15345875"></polygon>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Account-Registration-(1)" transform="translate(-1040.000000, -680.000000)">
+            <g id="green_check-copy" transform="translate(1037.000000, 676.000000)">
+                <g id="Page-1" transform="translate(3.629697, 4.836415)">
+                    <g id="checkmark">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <g id="path-1"></g>
+                        <path d="M3.02726951,8.15345875 C2.91888902,8.15345875 2.81487551,8.10741607 2.73944587,8.02560811 L0.109333284,5.16561807 C-0.041526004,5.00117994 -0.0355710321,4.74095661 0.123625216,4.5843293 C0.281630471,4.42770199 0.532930285,4.43427952 0.684980566,4.59871764 L3.00543461,7.12202063 L8.52728155,0.150255334 C8.66662791,-0.0244601707 8.91633973,-0.0511813656 9.08625492,0.0931130868 C9.25577311,0.237407539 9.27998999,0.496397582 9.14104068,0.671935277 L3.33414906,8.00299787 C3.2622924,8.09426102 3.15589691,8.1489367 3.04195844,8.15345875 L3.02726951,8.15345875" id="Fill-1" fill="#FFFFFF" mask="url(#mask-2)"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
