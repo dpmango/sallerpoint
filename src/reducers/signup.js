@@ -2,8 +2,8 @@ import * as types from '../store/ActionTypes';
 
 export const initialState = {
   signupStep: 1,
-  signupEmail: '',
-  signupId: '',
+  signupEmail: undefined,
+  signupId: undefined,
   fields: {
     first_name: '',
     last_name: '',

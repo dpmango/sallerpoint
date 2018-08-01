@@ -52,7 +52,7 @@
       .signup-nav__number
         &::after
           display: none
-    &.is-active
+    &.is-current
       .signup-nav
         &__number
           &::after
@@ -68,6 +68,14 @@
         .signup-nav__number
           &::before
             background-color: $colorYellow
+    &.is-done
+      .signup-nav
+        &__number
+          span
+            background: $colorGreen svg-load('../images/icons/checkmark.svg') no-repeat center
+            border-color: $colorGreen
+            color: white
+
 
   &__number
     position: relative

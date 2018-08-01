@@ -32,7 +32,7 @@ export default class PassMeter extends React.Component {
   // pass strength meter
   calculate = () => {
     const password = this.props.password
-    const min_length = password.length >= 8
+    const min_length = password ? password.length >= 8 : false
     const contains_upcase = /[A-Z]/.test(password)
     const contains_lowercase = /[a-z]/.test(password)
     const contains_digits = /\d/.test(password)

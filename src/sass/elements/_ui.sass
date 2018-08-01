@@ -59,13 +59,12 @@
       padding-left: 10px
 
 .ui-input-validation
-  position: absolute
-  bottom: -20px
-  left: 0
-  color: tomato
-  // margin-top: 10px
+  display: block
+  margin-top: -10px
+  margin-bottom: 10px
+  color: $colorRed
   font-size: 13px
-  text-align: left
+  text-align: right
 
 .ui-group-validation
   position: absolute
@@ -155,17 +154,8 @@
   .ui-checkbox
     &__label
       &::before
-        border-color: tomato
+        border-color: $colorRed
     &.is-active
       .ui-checkbox__label
         &::before
           border-color: rgba($fontColorGray, .5)
-  .DateInput_input
-    border-color: tomato
-  .Select-control
-    border-color: tomato
-
-  // reset for focused
-  .is-focused
-    .DateInput_input
-      border-color: #2F417C

@@ -4,14 +4,21 @@ import PropTypes from 'prop-types';
 import Formsy from 'formsy-react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-import { setSignupStep } from '../actions/signup';
-
+import { setSignupStep, setSignupEmail, setSignupId, setSignupFields } from '../actions/signup';
+import api from '../services/Api';
 import FormInput from '../components/FormInput';
 import PassMeter from '../components/PassMeter';
 
 class SignupStep1 extends Component {
   static propTypes = {
+    signupEmail: PropTypes.string,
+    signupFields: PropTypes.object,
+    signupId: PropTypes.number,
+
     setSignupStep: PropTypes.func,
+    setSignupId: PropTypes.func,
+    setSignupEmail: PropTypes.func,
+    setSignupFields: PropTypes.func,
   };
 
   constructor(props) {
@@ -26,6 +33,7 @@ class SignupStep1 extends Component {
       password: props.signupFields.password,
       password_confirmation: '',
       captcha: null,
+      passwords_match: null,
       formIsValid: false,
       isTransitioningNext: false
     };
@@ -55,9 +63,17 @@ class SignupStep1 extends Component {
     }
   }
 
-  // click handler for the button
+  // submit handler for the form (prevalidations, etc)
   submitForm = () => {
-    this.formRef.current.submit();
+    if ( this.state.password && (this.state.password === this.state.password_confirmation) ){
+      this.setState({passwords_match: true})
+    } else {
+      this.setState({passwords_match: false})
+    }
+
+    if ( this.state.captcha === null ){
+      this.setState({captcha: false})
+    }
   }
 
   handleChange = (e) => {
@@ -68,8 +84,72 @@ class SignupStep1 extends Component {
 
 
   nextStep = () => {
-    const { first_name, last_name, company_name, email, phone } = this.state;
-    this.props.setSignupStep(2);
+    const { first_name, last_name, company_name, email, phone, password } = this.state;
+
+    const leadObj = {
+      email: email,
+      password: password,
+      firstName: first_name,
+      lastName: last_name,
+      workPhone: phone,
+      companyName: company_name
+    }
+
+    // create new user
+    api
+      .post(`Signup`, leadObj)
+      .then((res) => {
+        console.log('back-end responce to post Signup', res)
+        if ( res.data.IsSuccess ){
+          // this.props.setSignupId(res.data.id); // TODO
+          this.props.setSignupEmail(res.data.email);
+          this.updateSignup();
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    // TODO
+    // if signup ID is present - then update by PATCH
+    // else - create new
+    // if ( this.props.signupId ){
+    //   // patch user
+    //   api
+    //     .patch('Signup' + this.props.signupId, {
+
+    // } else {
+    //   // create new user
+    //   api
+    //     .post(`Signup`, {
+    // }
+
+  }
+
+  updateSignup = () => {
+
+    const { first_name, last_name, company_name, phone } = this.state;
+
+    this.setState({
+      isTransitioningNext: true,
+      passwords_match: null // null pass validation
+    })
+
+    setTimeout(() => {
+      this.props.setSignupStep(2);
+
+      this.props.setSignupFields({
+        ...this.props.signupFields,
+        first_name: first_name,
+        last_name: last_name,
+        company_name: company_name,
+        phone: phone,
+      })
+
+      this.setState({ isTransitioningNext: false })
+
+    }, 400)
+
   }
 
 
@@ -80,6 +160,7 @@ class SignupStep1 extends Component {
       <div className="signup__container">
         <Formsy
           className="signup__form"
+          onSubmit={this.submitForm}
           onValidSubmit={this.handleSubmit}
           onValid={this.formValid}
           onInvalid={this.formInvalid}
@@ -137,32 +218,22 @@ class SignupStep1 extends Component {
           />
           <FormInput
             name="phone"
-            label="Phone Number"
-            placeholder="Phone"
-            value={phone}
-            onChangeHandler={this.handleChange}
-            validationErrors={{
-              isDefaultRequiredValue: 'Please fill phone'
-            }}
-          />
-          { /* <FormInput
-            name="phone"
             type="tel"
-            placeholder="Phone Number"
+            label="Phone Number"
+            placeholder="XXX-XXX-XXXX"
             value={phone}
-            mask={['+','6','5', ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]}
+            mask={[/\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
             onChangeHandler={this.handleChange}
             validations={{
-              matchRegexp: /\+65 \d{4} \d{4}/
+              matchRegexp: /\d{3}-\d{3}-\d{4}/
             }}
             validationErrors={{
               matchRegexp: "Phone number is not valid",
-              isDefaultRequiredValue: 'Please fill phone'
             }}
-            required
-          /> */}
+          />
           <FormInput
             name="password"
+            type="password"
             label="Password"
             placeholder=""
             value={password}
@@ -176,6 +247,7 @@ class SignupStep1 extends Component {
 
           <FormInput
             name="password_confirmation"
+            type="password"
             label="Confirm Password"
             placeholder=""
             value={password_confirmation}
@@ -185,6 +257,9 @@ class SignupStep1 extends Component {
             }}
             required
           />
+          { this.state.passwords_match === false &&
+            <span className="ui-input-validation">Passwords didn't match</span>
+          }
           <div className="signup__captcha">
             <ReCAPTCHA
               sitekey="6LfbfWcUAAAAAIjvp3Ww33D8LFDQBndWhjX9mkl2"
@@ -192,11 +267,14 @@ class SignupStep1 extends Component {
               onChange={this.recaptchaVerify}
             />
           </div>
+          { this.state.captcha === false &&
+            <span className="ui-input-validation">Please validate that your are not a robot</span>
+          }
           <div className="signup__rules">
           By signing up, you are agreeing to KiniMetrix’s <br/><a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
           </div>
           <div className="signup__form-cta">
-            <button onClick={this.submitForm} className="btn btn-signup btn--block">Sign Up</button>
+            <button type="submit" className="btn btn-signup btn--block">Sign Up</button>
           </div>
         </Formsy>
       </div>
@@ -207,10 +285,15 @@ class SignupStep1 extends Component {
 
 const mapStateToProps = (state) => ({
   signupFields: state.signup.fields,
+  signupEmail: state.signup.signupEmail,
+  signupId: state.signup.signupId
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setSignupStep: (data) => dispatch(setSignupStep(data)),
+  setSignupFields: (data) => dispatch(setSignupEmail(data)),
+  setSignupEmail: (data) => dispatch(setSignupId(data)),
+  setSignupId: (data) => dispatch(setSignupFields(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupStep1);

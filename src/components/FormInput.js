@@ -18,49 +18,57 @@ class FormInput extends Component {
     this.props.setValue(event.currentTarget.value);
   }
 
-  render(){
+  getInput = () => {
     const { name, placeholder, mask, isRequired, label } = this.props
-
     const type = this.props.type ? this.props.type : "text"
+
+    if ( mask ){
+      return (
+        <MaskedInput
+          name={name}
+          type={type}
+          mask={mask}
+          guide={false}
+          placeholder={placeholder}
+          onChange={this.changeValue}
+          value={this.props.getValue() || ''}
+        />
+      )
+    } else {
+      return(
+        <input
+          name={name}
+          type={type}
+          placeholder={placeholder}
+          onChange={this.changeValue}
+          value={this.props.getValue() || ''}
+          // required={isRequired() ? true : false}
+        />
+      )
+    }
+  }
+
+  render(){
+    const { name, label, isRequired } = this.props
 
     // An error message is returned only if the component is invalid
     const errorMessage = this.props.isFormSubmitted() ? this.props.getErrorMessage() : null;
     const parentClass = this.props.isFormSubmitted() ? this.props.isValid() ? 'ui-group' : 'ui-group has-error' : 'ui-group'
 
-    if ( mask ){
-      return (
-        <div className={parentClass}>
-          <MaskedInput
-            type={type}
-            mask={mask}
-            guide={false}
-            name={name}
-            placeholder={placeholder}
-            onChange={this.changeValue}
-            value={this.props.getValue() || ''}
-          />
-          <span className="ui-input-validation">{errorMessage}</span>
-        </div>
-      )
-    } else {
-      return(
+    return (
+      <React.Fragment>
         <div className={parentClass + (label ? " ui-group--labeled" : "")}>
           <label htmlFor={name}>
             {isRequired() ? '*' : ""}
             {label}
           </label>
-          <input
-            type={type}
-            name={name}
-            placeholder={placeholder}
-            onChange={this.changeValue}
-            value={this.props.getValue() || ''}
-            // required={isRequired() ? true : false}
-          />
-          <span className="ui-input-validation">{errorMessage}</span>
+          { this.getInput() }
         </div>
-      )
-    }
+        { errorMessage &&
+          <span className="ui-input-validation">{errorMessage}</span>
+        }
+      </React.Fragment>
+    )
 
   }
 }
