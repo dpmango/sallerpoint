@@ -35,7 +35,8 @@ class SignupStep1 extends Component {
       captcha: null,
       passwords_match: null,
       formIsValid: false,
-      isTransitioningNext: false
+      isTransitioningNext: false,
+      apiError: null
     };
 
     this.formRef = React.createRef();
@@ -58,14 +59,17 @@ class SignupStep1 extends Component {
 
   // submit handler from the form
   handleSubmit = (e) => {
-    if ( this.state.formIsValid && this.state.captcha ){
+    if ( this.state.formIsValid &&
+         this.state.captcha &&
+         ( this.state.password === this.state.password_confirmation )
+       ){
       this.nextStep();
     }
   }
 
   // submit handler for the form (prevalidations, etc)
   submitForm = () => {
-    if ( this.state.password && (this.state.password === this.state.password_confirmation) ){
+    if ( this.state.password === this.state.password_confirmation ){
       this.setState({passwords_match: true})
     } else {
       this.setState({passwords_match: false})
@@ -74,6 +78,8 @@ class SignupStep1 extends Component {
     if ( this.state.captcha === null ){
       this.setState({captcha: false})
     }
+
+    this.setState({apiError: null});
   }
 
   handleChange = (e) => {
@@ -82,9 +88,8 @@ class SignupStep1 extends Component {
     this.setState({...this.state, [fieldName]: fleldVal});
   }
 
-
   nextStep = () => {
-    const { first_name, last_name, company_name, email, phone, password } = this.state;
+    const { first_name, last_name, company_name, email, phone, password, captcha } = this.state;
 
     const leadObj = {
       email: email,
@@ -92,7 +97,8 @@ class SignupStep1 extends Component {
       firstName: first_name,
       lastName: last_name,
       workPhone: phone,
-      companyName: company_name
+      companyName: company_name,
+      "g-recaptcha-response": captcha
     }
 
     // create new user
@@ -100,10 +106,16 @@ class SignupStep1 extends Component {
       .post(`Signup`, leadObj)
       .then((res) => {
         console.log('back-end responce to post Signup', res)
+        console.log(res.config.data)
         if ( res.data.IsSuccess ){
           // this.props.setSignupId(res.data.id); // TODO
           this.props.setSignupEmail(res.data.email);
           this.updateSignup();
+        } else {
+          this.setState({
+            apiError: res.data.ErrorMessage
+          })
+          // error handler ?
         }
       })
       .catch(function (error) {
@@ -154,7 +166,7 @@ class SignupStep1 extends Component {
 
 
   render(){
-    const { first_name, last_name, company_name, email, phone, password, password_confirmation, isTransitioningNext } = this.state;
+    const { first_name, last_name, company_name, email, phone, password, password_confirmation, isTransitioningNext, apiError } = this.state;
 
     return(
       <div className="signup__container">
@@ -166,6 +178,9 @@ class SignupStep1 extends Component {
           onInvalid={this.formInvalid}
           ref={this.formRef}
         >
+          { apiError &&
+            <span className="ui-input-validation">{apiError}</span>
+          }
           <FormInput
             name="first_name"
             label="First Name"
