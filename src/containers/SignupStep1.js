@@ -98,7 +98,7 @@ class SignupStep1 extends Component {
       lastName: last_name,
       workPhone: phone,
       companyName: company_name,
-      "g-recaptcha-response": captcha
+      captchaResponse: captcha
     }
 
     // create new user
