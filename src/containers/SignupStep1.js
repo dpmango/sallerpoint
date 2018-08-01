@@ -262,7 +262,7 @@ class SignupStep1 extends Component {
           }
           <div className="signup__captcha">
             <ReCAPTCHA
-              sitekey="6LfbfWcUAAAAAIjvp3Ww33D8LFDQBndWhjX9mkl2"
+              sitekey="6Ld-90UUAAAAAP1OQz2XtlLe_zd8AYmMCql1vJXE"
               render="explicit"
               onChange={this.recaptchaVerify}
             />
