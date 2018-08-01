@@ -10,7 +10,7 @@ export default class PassMeter extends React.Component {
     super(props);
 
     this.state = {
-      pass_strength: {
+      rules: {
         min_length: false,
         contains_upcase: false,
         contains_lowercase: false,
@@ -38,7 +38,7 @@ export default class PassMeter extends React.Component {
     const contains_digits = /\d/.test(password)
 
     this.setState({
-      pass_strength: {
+      rules: {
         min_length: min_length,
         contains_upcase: contains_upcase,
         contains_lowercase: contains_lowercase,
@@ -48,7 +48,7 @@ export default class PassMeter extends React.Component {
   }
 
   getValues = () => {
-    const valiations = Object.values(this.state.pass_strength)
+    const valiations = Object.values(this.state.rules)
     let counter = 0;
     let name = ""
     valiations.forEach( (x) => x === true ? counter++ : false )
@@ -71,7 +71,7 @@ export default class PassMeter extends React.Component {
 
   render(){
     const passMeterValidations = this.getValues()
-    const { pass_strength } = this.state;
+    const { rules } = this.state;
     return(
       <div className="pass-meter">
         <div className="pass-meter__line" data-counter={passMeterValidations.count}>
@@ -82,10 +82,10 @@ export default class PassMeter extends React.Component {
         <div className="pass-meter__info">
           <span>Password Requirements:</span>
           <ul>
-            <li className={pass_strength.min_length ? "is-good": ""}>Minimum of 8 characters</li>
-            <li className={pass_strength.contains_upcase ? "is-good": ""}>Contains a capital letter</li>
-            <li className={pass_strength.contains_lowercase ? "is-good": ""}>Contains a lower case letter</li>
-            <li className={pass_strength.contains_digits ? "is-good": ""}>Contains a number</li>
+            <li className={rules.min_length ? "is-good": ""}>Minimum of 8 characters</li>
+            <li className={rules.contains_upcase ? "is-good": ""}>Contains a capital letter</li>
+            <li className={rules.contains_lowercase ? "is-good": ""}>Contains a lower case letter</li>
+            <li className={rules.contains_digits ? "is-good": ""}>Contains a number</li>
           </ul>
         </div>
       </div>
