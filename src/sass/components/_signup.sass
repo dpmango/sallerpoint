@@ -14,6 +14,9 @@
       max-width: 350px
       margin-left: auto
       margin-top: 15px
+      &--centered
+        margin-left: auto
+        margin-right: auto
 
   &__captcha
     max-width: 350px
@@ -33,87 +36,66 @@
       &:hover
         color: $colorYellow
 
-.signup-nav
-  margin: 20px 0
-  &__wrapper
-    display: flex
-    justify-content: center
-  &__el
-    flex: 0 1 auto
-    color: white
-    display: flex
-    flex-direction: column
-    align-items: center
-    &:first-child
-      .signup-nav__number
-        &::before
-          display: none
-    &:last-child
-      .signup-nav__number
-        &::after
-          display: none
-    &.is-current
-      .signup-nav
-        &__number
-          &::after
-            background-color: $colorYellow
-          span
-            background: $colorYellow
-            border-color: $colorYellow
-            color: white
-        &__name
-          color: $colorYellow
-
-      + .signup-nav__el
-        .signup-nav__number
-          &::before
-            background-color: $colorYellow
-    &.is-done
-      .signup-nav
-        &__number
-          span
-            background: $colorGreen svg-load('../images/icons/checkmark.svg') no-repeat center
-            background-size: 70%
-            border-color: $colorGreen
-            color: white
-            font-size: 0
-
-
-  &__number
-    position: relative
-    padding-left: 75px
-    padding-right: 75px
-    span
-      display: inline-block
-      position: relative
-      z-index: 2
-      size: 36px
-      background: #EDEDED
-      border: 3px solid #FFFFFF
-      border-radius: 50%
-      display: flex
-      align-items: center
-      justify-content: center
-      color: #888B8B
-      transition: .25s $ease
-    &::before, &::after
-      display: inline-block
-      content: ' '
-      position: absolute
-      z-index: 1
-      top: 50%
-      transform: translateY(-50%)
-      height: 3px
-      background: #EDEDED
-      width: 75px
-    &::before
-      left: 0px
-    &::after
-      right: 0px
-
-  &__name
+  &__heading
+    font-size: 18px
+    font-weight: bold
+    color: #4A4A4A
+    margin: -15px 0 30px
     text-align: center
-    color: #F9F9F9
+
+  &__choose
     font-size: 14px
-    margin-top: 10px
-    font-family: $varelaFamily
+    font-weight: bold
+    color: #383838
+    margin: 0
+    text-align: center
+    &--not-bold
+      font-weight: normal
+      margin-left: -10px
+      margin-right: -10px
+
+  &__options
+    margin: 30px auto
+    max-width: 350px
+
+  &__note
+    background: #FFF3DE
+    padding: 25px 10px 15px 25px
+    font-size: 14px
+    margin-left: -20px
+    margin-right: -20px
+    margin-bottom: 30px
+    .t-up
+      font-size: 17px
+
+
+.signup-option
+  position: relative
+  font-size: 14px
+  text-align: center
+  width: 100%
+  border: 1px solid #CCCCCC
+  border-radius: 3px
+  padding: 12px
+  margin-bottom: 15px
+  color: #9B9B9B
+  transition: .25s $ease
+  &:last-child
+    margin-bottom: 0
+  &::after
+    display: block
+    content: ' '
+    position: absolute -2px
+    border: 2px solid #0A1E39
+    opacity: 0
+    border-radius: 3px
+    transition: .25s $ease
+  &[data-disabled="true"]
+    pointer-events: none
+  &:hover
+    border-color: #0A1E39
+  &.is-active
+    border-color: #0A1E39
+    color: #0A1E39
+    &:after
+      opacity: 1
