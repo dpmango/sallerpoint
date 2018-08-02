@@ -21,10 +21,9 @@ class Signup extends Component {
     this.updateURL();
     this.props.setHeaderClass('header--logo-only');
   }
-  
+
   componentDidUpdate(){
     this.updateURL();
-    this.props.aosInst.refreshHard();
   }
 
   updateURL = () => {

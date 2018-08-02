@@ -9,13 +9,15 @@ class SignupStep2 extends Component {
   };
 
   nextStep = () => {
-    this.props.setSignupStep(2);
+    // this.props.setSignupStep(2);
   }
 
   render(){
     return(
-      <div className="container">
-        <h1>Signup step 2</h1>
+      <div className="signup__container">
+        <div className="signup__form">
+          <h1>Signup step 2</h1>
+        </div>
       </div>
     )
   }

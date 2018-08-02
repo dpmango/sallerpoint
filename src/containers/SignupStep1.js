@@ -106,10 +106,9 @@ class SignupStep1 extends Component {
       .post(`Signup`, leadObj)
       .then((res) => {
         console.log('back-end responce to post Signup', res)
-        console.log(res.config.data)
         if ( res.data.IsSuccess ){
           // this.props.setSignupId(res.data.id); // TODO
-          this.props.setSignupEmail(res.data.email);
+          this.props.setSignupEmail(res.config.data.email);
           this.updateSignup();
         } else {
           this.setState({
@@ -143,24 +142,20 @@ class SignupStep1 extends Component {
     const { first_name, last_name, company_name, phone } = this.state;
 
     this.setState({
-      isTransitioningNext: true,
       passwords_match: null // null pass validation
     })
 
-    setTimeout(() => {
-      this.props.setSignupStep(2);
+    this.props.setSignupStep(2);
 
-      this.props.setSignupFields({
-        ...this.props.signupFields,
-        first_name: first_name,
-        last_name: last_name,
-        company_name: company_name,
-        phone: phone,
-      })
+    this.props.setSignupFields({
+      ...this.props.signupFields,
+      first_name: first_name,
+      last_name: last_name,
+      company_name: company_name,
+      phone: phone,
+    })
 
-      this.setState({ isTransitioningNext: false })
-
-    }, 400)
+    this.setState({ isTransitioningNext: false })
 
   }
 
@@ -306,9 +301,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setSignupStep: (data) => dispatch(setSignupStep(data)),
-  setSignupFields: (data) => dispatch(setSignupEmail(data)),
-  setSignupEmail: (data) => dispatch(setSignupId(data)),
-  setSignupId: (data) => dispatch(setSignupFields(data))
+  setSignupFields: (data) => dispatch(setSignupFields(data)),
+  setSignupEmail: (data) => dispatch(setSignupEmail(data)),
+  setSignupId: (data) => dispatch(setSignupId(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupStep1);

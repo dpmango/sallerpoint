@@ -1,4 +1,4 @@
-const version = "1"
+const version = "1.1"
 
 export const loadState = () => {
   try {
@@ -7,7 +7,7 @@ export const loadState = () => {
       localStorage.setItem("storageVersion", version);
     }
 
-    const serializedState = localStorage.getItem('cabinState');
+    const serializedState = localStorage.getItem('sallerpointState');
     if (serializedState) {
       return JSON.parse(serializedState);
     }
