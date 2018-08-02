@@ -34,7 +34,7 @@ class RenderSwitch extends React.Component {
           <PropsRoute
             key={route.path}
             exact={route.isExact}
-            path={route.path}
+            path={process.env.PUBLIC_URL + route.path}
             component={route.component}
           />
         ))}

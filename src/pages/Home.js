@@ -8,9 +8,9 @@ export default class Home extends Component {
       <div className="home">
         <div className="container">
           <h1>Home page</h1>
-          <Link to="/login" className="btn btn-primary">Login page</Link>
-          <Link to="/signup" className="btn btn-primary">Signup page</Link>
-          <Link to="/dash" className="btn btn-primary">Dashboard page</Link>
+          <Link to={`${process.env.PUBLIC_URL}/login`} className="btn btn-primary">Login page</Link>
+          <Link to={`${process.env.PUBLIC_URL}/signup`} className="btn btn-primary">Signup page</Link>
+          <Link to={`${process.env.PUBLIC_URL}/dash`} className="btn btn-primary">Dashboard page</Link>
         </div>
       </div>
     )

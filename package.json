@@ -1,5 +1,6 @@
 {
   "name": "sallerpoint",
+  "homepage": "http://qa.kinimetrix.com:8082/SellerPoint",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

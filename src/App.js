@@ -20,7 +20,7 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter basename={'/SellerPoint'}>
         <div className="page">
           <Header routes={routes.filter(route => route.forNavBar)}/>
             <div className="page__content">

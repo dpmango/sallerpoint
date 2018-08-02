@@ -29,7 +29,7 @@ class Signup extends Component {
   updateURL = () => {
     const { signupStep, location, history } = this.props
 
-    let newPath = "/signup/step-" + (signupStep);
+    let newPath = process.env.PUBLIC_URL + "/signup/step-" + (signupStep);
     if ( location.pathname === newPath ){
       return
     }
