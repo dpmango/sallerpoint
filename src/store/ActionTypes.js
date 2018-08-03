@@ -7,3 +7,6 @@ export const SET_SIGNUP_AUTH_STEP = 'SET_SIGNUP_AUTH_STEP';
 export const SET_SIGNUP_EMAIL = 'SET_SIGNUP_EMAIL';
 export const SET_SIGNUP_ID = 'SET_SIGNUP_ID';
 export const SET_SIGNUP_FIELDS = 'SET_SIGNUP_FIELDS';
+
+export const LOG_IN = 'LOG_IN';
+export const LOG_OUT = 'LOG_OUT';

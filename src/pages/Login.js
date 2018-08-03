@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Formsy from 'formsy-react';
 import api from '../services/Api';
@@ -8,10 +9,12 @@ import CheckBox from '../components/CheckBox';
 import FormLoader from '../components/FormLoader';
 
 import { setHeaderClass } from '../actions/header';
+import { logIn } from '../actions/login';
 
 class Login extends Component {
   static propTypes = {
     setHeaderClass: PropTypes.func.isRequired,
+    logIn: PropTypes.func.isRequired
   };
 
   constructor(props){
@@ -23,6 +26,7 @@ class Login extends Component {
       rememberMe: false,
       formIsValid: false,
       apiError: null,
+      authenticated: false,
       isFormSubmited: false
     }
   }
@@ -74,10 +78,22 @@ class Login extends Component {
       .post(`Login`, loginData)
       .then((res) => {
         console.log('backend responce to POST LOGIN', res)
+        // "{
+        //   ""AuthToken"": ""bk5KY1YyQllmZHZJMm85THBiQmcxQm4zM3A4VElMRmNkSjdISFN0dG9Qbz06cG11bmRvbGltb29sZUB0aGVraW5pZ3JvdXAuY29tOjYzNjY4ODk4MTg2OTA5MDc4Nw=="",
+        //   ""IsSuccess"": true,
+        //   ""ErrorMessage"": ""An error has occurred.""
+        // }"
 
-        ///
-        // TODO
-        ///
+        if ( res.data.IsSuccess && res.data.AuthToken ){
+          this.props.logIn(res.data.AuthToken);
+          this.setState({
+            authenticated: true
+          })
+        } else {
+          this.setState({
+            apiError: res.data.ErrorMessage
+          })
+        }
 
         this.setState({
           isFormSubmited: false // reset submit status
@@ -94,7 +110,11 @@ class Login extends Component {
 
   render(){
 
-    const { email, password, rememberMe, apiError, isFormSubmited } = this.state;
+    const { email, password, rememberMe, apiError, isFormSubmited, authenticated } = this.state;
+
+    if ( authenticated ){
+      return <Redirect to={`${process.env.PUBLIC_URL}/dash`} />
+    }
     return(
       <div className="signup login">
         <div className="container">
@@ -165,7 +185,8 @@ const mapStateToProps = (state) => (
 
 const mapDispatchToProps = (dispatch) => (
   {
-    setHeaderClass: (data) => dispatch(setHeaderClass(data))
+    setHeaderClass: (data) => dispatch(setHeaderClass(data)),
+    logIn: (data) => dispatch(logIn(data)),
   }
 );
 
