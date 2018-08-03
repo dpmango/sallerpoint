@@ -1,7 +1,8 @@
 import * as types from '../store/ActionTypes';
 
 export const initialState = {
-  signupStep: 1,
+  signupStep: 2,
+  signupAuthStep: 1,
   signupEmail: undefined,
   signupId: undefined,
   fields: {
@@ -10,7 +11,12 @@ export const initialState = {
     company_name: '',
     email: '',
     phone: '',
-    password: ''
+    password: '',
+    marketplace_region: 1,
+    seller_id: '',
+    mws_auth: '',
+    authenticated_marketplace: null,
+    marketplace_domains: []
   }
 }
 
@@ -21,6 +27,11 @@ const signup = (state = initialState, action) => {
       return {
         ...state,
         signupStep: action.payload,
+      }
+    case types.SET_SIGNUP_AUTH_STEP:
+      return {
+        ...state,
+        signupAuthStep: action.payload,
       }
     case types.SET_SIGNUP_ID:
       return {

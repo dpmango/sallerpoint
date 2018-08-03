@@ -1,12 +1,12 @@
 import * as types from '../store/ActionTypes';
 
-export const setHeaderClass = (data) => ({
-  type: types.SET_HEADER_CLASS,
+export const setSignupStep = (data) => ({
+  type: types.SET_SIGNUP_STEP,
   payload: data
 })
 
-export const setSignupStep = (data) => ({
-  type: types.SET_SIGNUP_STEP,
+export const setSignupAuthStep = (data) => ({
+  type: types.SET_SIGNUP_AUTH_STEP,
   payload: data
 })
 

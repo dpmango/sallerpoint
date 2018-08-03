@@ -2,17 +2,17 @@ import React from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { routes } from './routes';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import ScrollTo from './services/ScrollTo';
 
 class RenderSwitch extends React.Component {
-  static propTypes = {
-
-  };
+  // static propTypes = {
+  //
+  // };
 
   componentDidUpdate(prevProps) {
-    const curPathSplit = this.props.location.pathname.split('/');
-    const prevPathSplit = prevProps.location.pathname.split('/');
+    // const curPathSplit = this.props.location.pathname.split('/');
+    // const prevPathSplit = prevProps.location.pathname.split('/');
 
     // transition when switching between the routes
     if (this.props.location.pathname !== prevProps.location.pathname) {

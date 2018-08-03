@@ -1,0 +1,13 @@
+.loader-container
+  position: relative
+  transition: .25s $ease
+  .loader
+    position: absolute
+    background: transparent
+    pointer-events: none
+    opacity: 0
+  &.is-loading
+    opacity: .65
+    pointer-events: none
+    .loader
+      opacity: 1

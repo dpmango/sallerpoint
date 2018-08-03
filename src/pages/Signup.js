@@ -3,9 +3,8 @@ import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { setHeaderClass } from '../actions/signup';
+import { setHeaderClass } from '../actions/header';
 
-import SvgIcon from '../components/SvgIcon';
 import SignupNav from '../components/SignupNav';
 import SignupStep1 from '../containers/SignupStep1';
 import SignupStep2 from '../containers/SignupStep2';

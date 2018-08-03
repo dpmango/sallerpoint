@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export default class PassMeter extends React.Component {
+export default class PassMeter extends Component {
   static propTypes = {
     password: PropTypes.string,
   };

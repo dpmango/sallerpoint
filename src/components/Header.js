@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import onClickOutside from "react-onclickoutside";
-import throttle from 'lodash/throttle';
+// import throttle from 'lodash/throttle';
 
 import { OPEN_MENU, CLOSE_MENU } from '../store/ActionTypes';
 import SvgIcon from '../components/SvgIcon'
@@ -17,40 +17,39 @@ class Header extends React.Component {
     closeMenu: PropTypes.func
   };
 
-  constructor(props){
-    super(props);
-
-    this.scrollWithThrottle = throttle(this.handleScroll, 200);
-
-    this.state = {
-      isScrolled: false
-    }
-  }
+  // constructor(props){
+  //   super(props);
+  //
+  //   // this.scrollWithThrottle = throttle(this.handleScroll, 200);
+  //
+  //   // this.state = {
+  //   //   isScrolled: false
+  //   // }
+  // }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.scrollWithThrottle, false);
+    // window.addEventListener('scroll', this.scrollWithThrottle, false);
   };
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.scrollWithThrottle, false);
+    // window.removeEventListener('scroll', this.scrollWithThrottle, false);
   };
 
-  handleScroll = (event) => {
-    var wScroll = window.scrollY
-
-    if ( wScroll > 10 ){
-      this.setState({
-        isScrolled: true
-      })
-    } else {
-      if ( this.state.isScrolled ){
-        this.setState({
-          isScrolled: false
-        })
-      }
-
-    }
-  };
+  // handleScroll = (event) => {
+  //   var wScroll = window.scrollY
+  //
+  //   if ( wScroll > 10 ){
+  //     this.setState({
+  //       isScrolled: true
+  //     })
+  //   } else {
+  //     if ( this.state.isScrolled ){
+  //       this.setState({
+  //         isScrolled: false
+  //       })
+  //     }
+  //   }
+  // };
 
   toggleHamburger = () => {
     this.props.menuOpened ? this.props.closeMenu() : this.props.openMenu()
@@ -72,10 +71,10 @@ class Header extends React.Component {
 
   render(){
 
-    const { routes, menuOpened } = this.props;
+    const { menuOpened } = this.props;
 
     return(
-      <div className={this.props.stateClass + (this.state.isScrolled ? ' is-scrolled' : '')}>
+      <div className={this.props.stateClass}>
         <header className='header'>
           <div className="container container--full">
             <div className="header__wrapper">
