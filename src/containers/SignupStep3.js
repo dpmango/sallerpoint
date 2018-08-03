@@ -8,14 +8,20 @@ class SignupStep3 extends Component {
     setSignupStep: PropTypes.func,
   };
 
-  nextStep = () => {
-    this.props.setSignupStep(2);
+  compleateSignup = () => {
+    this.props.setSignupStep(1);
   }
 
   render(){
     return(
-      <div className="container">
-        <h1>Signup step 3</h1>
+      <div className="signup__container signup__container--wide">
+        <div className="signup__form">
+          <div className="signup__heading">Set up your advertising data by connecting your Sponsored Products so we can help you manage the effectiveness of your campaigns</div>
+
+          <div className="signup__form-cta signup__form-cta--centered">
+            <span onClick={this.compleateSignup} className="btn btn-signup btn--block">Complete</span>
+          </div>
+        </div>
       </div>
     )
   }

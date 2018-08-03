@@ -109,6 +109,36 @@ class SignupStep1 extends Component {
       isFormSubmited: true // reset submit status
     })
 
+    // check dublicate first
+    // "{
+    //   ""IsDuplicateUser"": true,
+    //   ""IsSuccess"": true,
+    //   ""ErrorMessage"": ""User with same details already exists in our database.""
+    // }"
+
+    api
+      .get(`CheckEmail?Email=${email}`)
+      .then((res) => {
+        console.log('backend responce to Get CheckEmail', res)
+        if ( res.data.IsDuplicateUser ){
+          this.formRef.current.updateInputsWithError({
+            email: res.data.ErrorMessage
+          });
+        } else {
+          this.createUser(leadObj)
+        }
+
+        this.setState({
+          isFormSubmited: false // reset submit status
+        })
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
+
+  createUser = (leadObj) => {
     // create new user
     api
       .post(`Signup`, leadObj)
@@ -123,9 +153,6 @@ class SignupStep1 extends Component {
             apiError: res.data.ErrorMessage
           })
         }
-        this.setState({
-          isFormSubmited: false // reset submit status
-        })
       })
       .catch(function (error) {
         console.log(error);
@@ -144,7 +171,6 @@ class SignupStep1 extends Component {
     //   api
     //     .post(`Signup`, {
     // }
-
   }
 
   updateSignup = () => {
