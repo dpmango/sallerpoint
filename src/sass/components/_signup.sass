@@ -90,6 +90,41 @@
   &__checkboxes
     margin: 15px 0 30px
 
+  &__table
+    border-collapse: collapse
+    width: 100%
+    margin-bottom: 40px
+    thead
+      td
+        background: #E5E5E5
+        font-weight: bold
+    tbody
+      td
+        border-bottom: 1px solid #979797
+        padding-top: 10px
+        padding-bottom: 10px
+
+    td
+      font-size: 14px
+      padding: 14px 17px
+    tr
+      td:last-child
+        text-align: center
+  &__table-connection
+    min-height: 34px
+    vertical-align: middle
+    display: flex
+    align-items: center
+    justify-content: center
+    font-size: 14px
+    .ico-checkmark
+      display: flex
+      background: $colorGreen svg-load('../images/icons/checkmark.svg') no-repeat center
+      border-radius: 50%
+      size: 23px
+      margin-right: 6px
+
+
 .signup-option
   position: relative
   font-size: 14px

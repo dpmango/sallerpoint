@@ -1,7 +1,7 @@
 import * as types from '../store/ActionTypes';
 
 export const initialState = {
-  signupStep: 2,
+  signupStep: 1,
   signupAuthStep: 1,
   signupEmail: undefined,
   signupId: undefined,
@@ -16,7 +16,8 @@ export const initialState = {
     seller_id: '',
     mws_auth: '',
     authenticated_marketplace: null,
-    marketplace_domains: []
+    marketplace_domains: [], //id's of authenticated marketplaces thats been choosen
+    connected_marketplaces: []
   }
 }
 

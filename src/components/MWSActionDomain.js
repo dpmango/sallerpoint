@@ -6,7 +6,7 @@ import Image from './Image';
 import CheckBox from './CheckBox';
 import FormLoader from './FormLoader';
 import api from '../services/Api';
-import { setSignupFields, setSignupStep } from '../actions/signup';
+import { setSignupFields, setSignupStep, setSignupAuthStep } from '../actions/signup';
 
 class MWSActionDomain extends Component {
 
@@ -77,8 +77,11 @@ class MWSActionDomain extends Component {
           if ( index === filteredMarketplaces.length - 1 ){
             this.props.setSignupFields({ // redux
               ...this.props.signupFields,
-              marketplace_domains: marketplaceDomains
+              marketplace_domains: marketplaceDomains,
+              connected_marketplaces: filteredMarketplaces
             })
+
+            this.props.setSignupAuthStep(1); // reset ?
             this.props.setSignupStep(3);
 
             this.setState({
@@ -142,6 +145,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setSignupFields: (data) => dispatch(setSignupFields(data)),
+  setSignupAuthStep: (data) => dispatch(setSignupAuthStep(data)),
   setSignupStep: (data) => dispatch(setSignupStep(data))
 });
 
