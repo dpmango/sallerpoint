@@ -15,11 +15,6 @@ export const setSignupEmail = (data) => ({
   payload: data
 })
 
-export const setSignupId = (data) => ({
-  type: types.SET_SIGNUP_ID,
-  payload: data
-})
-
 export const setSignupFields = (data) => ({
   type: types.SET_SIGNUP_FIELDS,
   payload: data

@@ -59,6 +59,13 @@ class SignupStep3 extends Component {
       return <Redirect to={`${process.env.PUBLIC_URL}/dash`} />
     }
 
+    const tableHeads = [
+      "Marketplace Name",
+      "Seller ID",
+      "MWS Status (SellerPoint)",
+      "Advertising Data Status"
+    ]
+
     return(
       <div className="signup__container signup__container--wide">
         <div className="signup__form">
@@ -66,20 +73,19 @@ class SignupStep3 extends Component {
           <table className="signup__table">
             <thead>
               <tr>
-                <td>Marketplace Name</td>
-                <td>Seller ID</td>
-                <td>MWS Status (SellerPoint)</td>
-                <td>Advertising Data Status</td>
+                { tableHeads.map( (name,index) => {
+                  return ( <td key={index}>{name}</td> )
+                }) }
               </tr>
             </thead>
             <tbody>
               { signupFields.connected_marketplaces.map( (mp, index) => {
                 const isConnected = connectedId.indexOf(mp.marketPlaceId) !== -1
                 return (
-                  <tr>
-                    <td>{mp.name}</td>
-                    <td>{mp.sellerId}</td>
-                    <td>{isConnected ? mp.connectionStatus : "Initial import in progress" }</td>
+                  <tr key={index}>
+                    <td><span className="for-desktop">{tableHeads[0]}</span>{mp.name}</td>
+                    <td><span className="for-desktop">{tableHeads[1]}</span>{mp.sellerId}</td>
+                    <td><span className="for-desktop">{tableHeads[2]}</span>{isConnected ? mp.connectionStatus : "Initial import in progress" }</td>
                     <td>
                       {isConnected ?
                         <span className="signup__table-connection"><span className="ico-checkmark"></span> Connected</span> :

@@ -4,7 +4,6 @@ export const initialState = {
   signupStep: 1,
   signupAuthStep: 1,
   signupEmail: undefined,
-  signupId: undefined,
   fields: {
     first_name: '',
     last_name: '',
@@ -33,11 +32,6 @@ const signup = (state = initialState, action) => {
       return {
         ...state,
         signupAuthStep: action.payload,
-      }
-    case types.SET_SIGNUP_ID:
-      return {
-        ...state,
-        signupId: action.payload,
       }
     case types.SET_SIGNUP_EMAIL:
       return {

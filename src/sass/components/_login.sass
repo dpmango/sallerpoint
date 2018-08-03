@@ -12,3 +12,16 @@
 .login-remember
   max-width: 350px
   margin-left: auto
+
++r($tablet)
+  .login-remember
+    max-width: 100%
+
++r($mobile)
+  .login-container
+    margin-left: -20px
+    margin-right: -20px
+    width: calc(100% + 40px)
+  .login
+    > .container
+      min-height: calc(100vh - 90px - 70px - 80px)

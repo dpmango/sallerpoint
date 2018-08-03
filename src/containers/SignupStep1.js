@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Formsy from 'formsy-react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-import { setSignupStep, setSignupEmail, setSignupId, setSignupFields } from '../actions/signup';
+import { setSignupStep, setSignupEmail, setSignupFields } from '../actions/signup';
 import api from '../services/Api';
 import FormInput from '../components/FormInput';
 import PassMeter from '../components/PassMeter';
@@ -134,12 +134,6 @@ class SignupStep1 extends Component {
     })
 
     // check dublicate first
-    // "{
-    //   ""IsDuplicateUser"": true,
-    //   ""IsSuccess"": true,
-    //   ""ErrorMessage"": ""User with same details already exists in our database.""
-    // }"
-
     api
       .get(`CheckEmail?Email=${email}`)
       .then((res) => {
@@ -148,13 +142,10 @@ class SignupStep1 extends Component {
           this.formRef.current.updateInputsWithError({
             email: res.data.ErrorMessage
           });
+          this.setState({isFormSubmited: false})
         } else {
-          this.createUser(leadObj)
+          this.createUser(leadObj) // move on if it's fine
         }
-
-        this.setState({
-          isFormSubmited: false // reset submit status
-        })
       })
       .catch(function (error) {
         console.log(error);
@@ -177,24 +168,12 @@ class SignupStep1 extends Component {
             apiError: res.data.ErrorMessage
           })
         }
+
+        this.setState({isFormSubmited: false})
       })
       .catch(function (error) {
         console.log(error);
       });
-
-    // TODO
-    // if signup ID is present - then update by PATCH
-    // else - create new
-    // if ( this.props.signupId ){
-    //   // patch user
-    //   api
-    //     .patch('Signup' + this.props.signupId, {
-
-    // } else {
-    //   // create new user
-    //   api
-    //     .post(`Signup`, {
-    // }
   }
 
   updateSignup = () => {
@@ -356,15 +335,13 @@ class SignupStep1 extends Component {
 
 const mapStateToProps = (state) => ({
   signupFields: state.signup.fields,
-  signupEmail: state.signup.signupEmail,
-  signupId: state.signup.signupId
+  signupEmail: state.signup.signupEmail
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setSignupStep: (data) => dispatch(setSignupStep(data)),
   setSignupFields: (data) => dispatch(setSignupFields(data)),
-  setSignupEmail: (data) => dispatch(setSignupEmail(data)),
-  setSignupId: (data) => dispatch(setSignupId(data))
+  setSignupEmail: (data) => dispatch(setSignupEmail(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupStep1);

@@ -7,7 +7,7 @@ let BACKEND_URL = "http://qa.kinimetrix.com:8082/SellerPoint/"
 const api = axios.create({
   baseURL: BACKEND_URL,
   headers: {
-    'authtoken': store.getState().login.authToken,
+    'authToken': store.getState().login.authToken,
     'Content-Type': 'application/json',
     'Accept': 'application/json',
     'X-Requested-With': 'XMLHttpRequest'

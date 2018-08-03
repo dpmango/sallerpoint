@@ -107,6 +107,8 @@
     td
       font-size: 14px
       padding: 14px 17px
+      .for-desktop
+        display: none
     tr
       td:last-child
         text-align: center
@@ -123,6 +125,68 @@
       border-radius: 50%
       size: 23px
       margin-right: 6px
+
++r($desktop)
+  .signup
+    &__table
+      display: block
+      thead
+        display: none
+      tbody
+        display: block
+        td
+          border-bottom: 0
+          padding-left: 0
+          padding-top: 5px
+          padding-right: 0
+      tr
+        display: block
+        margin-bottom: 20px
+        td:last-child
+          text-align: left
+      td
+        display: block
+        .for-desktop
+          display: block
+          font-size: 12px
+          font-weight: bold
+          margin-bottom: 5px
+
++r($tablet)
+  .signup
+    &__form
+      &-cta
+        margin-left: auto
+        margin-right: auto
+
+    &__captcha
+      margin-right: auto
+      max-width: 304px
+
+    &__rules
+      margin-right: auto
+      max-width: 304px
+
++r($mobile)
+  .signup
+    padding-top: 90px
+    &__container
+      margin: 30px -20px 0
+    &__form
+      padding-left: 20px
+      padding-right: 20px
+    &__note
+      font-size: 13px
+      .t-up
+        font-size: 15px
+    &__subcontainer
+      padding-left: 0
+      padding-right: 0
+      img
+        margin-left: -20px
+        margin-right: -20px
+        width: calc(100% + 40px)
+        max-width: calc(100% + 40px)
 
 
 .signup-option

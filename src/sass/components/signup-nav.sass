@@ -83,3 +83,29 @@
     font-size: 14px
     margin-top: 10px
     font-family: $varelaFamily
+
++r($mobile)
+  .signup-nav
+    &__number
+      padding-left: 40px
+      padding-right: 40px
+      span
+        size: 30px
+        font-size: 14px
+      &::before, &::after
+        width: 40px
+    &__name
+      font-size: 12px
+      margin-top: 7px
+
++r($mobile-s)
+  .signup-nav
+    &__wrapper
+      margin-left: -5px
+    &__number
+      padding-left: 35px
+      padding-right: 35px
+      &::before, &::after
+        width: 35px
+    &__name
+      font-size: 11px
