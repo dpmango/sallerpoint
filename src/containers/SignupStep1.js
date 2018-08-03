@@ -10,6 +10,31 @@ import FormInput from '../components/FormInput';
 import PassMeter from '../components/PassMeter';
 import FormLoader from '../components/FormLoader';
 
+// Formsy.addValidationRule('isValidPassword', (values, value) => {
+//   // const min_length = value ? value.length >= 8 : false
+//   // const contains_upcase = /[A-Z]/.test(value)
+//   // const contains_lowercase = /[a-z]/.test(value)
+//   // const contains_digits = /\d/.test(value)
+//   //
+//   // const rules = {
+//   //   min_length: min_length,
+//   //   contains_upcase: contains_upcase,
+//   //   contains_lowercase: contains_lowercase,
+//   //   contains_digits: contains_digits
+//   // }
+//   //
+//   // const valiations = Object.values(rules)
+//   // let counter = 0;
+//   // let name = ""
+//   // valiations.forEach( (x) => x === true ? counter++ : false )
+//   //
+//   // if ( counter >= 3 ){
+//   //   return true
+//   // } else {
+//   //   return false
+//   // }
+// });
+
 class SignupStep1 extends Component {
   static propTypes = {
     signupEmail: PropTypes.string,
@@ -36,7 +61,6 @@ class SignupStep1 extends Component {
       captcha: null,
       passwords_match: null,
       formIsValid: false,
-      isTransitioningNext: false,
       apiError: null,
       isFormSubmited: false
     };
@@ -192,13 +216,11 @@ class SignupStep1 extends Component {
       password: password
     })
 
-    this.setState({ isTransitioningNext: false })
-
   }
 
 
   render(){
-    const { first_name, last_name, company_name, email, phone, password, password_confirmation, isTransitioningNext, apiError, isFormSubmited } = this.state;
+    const { first_name, last_name, company_name, email, phone, password, password_confirmation, apiError, isFormSubmited } = this.state;
 
     return(
       <div className="signup__container">

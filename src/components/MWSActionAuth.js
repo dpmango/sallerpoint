@@ -61,22 +61,13 @@ class MWSActionAuth extends Component {
     this.setState({
       isFormSubmited: true
     })
+    
     // authenticate
-    // "{
-    //   ""Marketplace"": null,
-    //   ""IsSuccess"": true,
-    //   ""ErrorMessage"": ""Please fill Seller ID and MWS Authtoken!""
-    // }"
-
-    // ASDFKJA3NJBRG
-    // amzn.mws.jjj3fe4-kj45-re5k76s9fd443
-
     api
       .post(`AuthenticateMWSDetails`, leadObj)
       .then((res) => {
         console.log('back-end responce to post AuthenticateMWSDetails', res)
-        console.log(res.data.IsSuccess)
-        if ( !res.data.IsSuccess ){ // TODO - tmp fix
+        if ( res.data.IsSuccess ){
           this.updateSignup(res.data.Marketplace);
         } else {
           this.setState({apiError: res.data.ErrorMessage})
@@ -91,7 +82,7 @@ class MWSActionAuth extends Component {
 
   }
 
-  updateSignup = (marketplace_id) => {
+  updateSignup = (marketplace_data) => {
 
     const { seller_id, mws_auth } = this.state;
 
@@ -99,7 +90,7 @@ class MWSActionAuth extends Component {
       ...this.props.signupFields,
       seller_id: seller_id,
       mws_auth: mws_auth,
-      authenticated_marketplace: marketplace_id
+      authenticated_marketplace: marketplace_data
     })
 
     this.props.setSignupAuthStep(

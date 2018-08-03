@@ -14,7 +14,9 @@ class MWSActionDomain extends Component {
     super(props);
 
     this.state = {
-      marketplaceDomains: this.props.signupFields.marketplace_domains
+      marketplaceDomains: this.props.signupFields.marketplace_domains, // state stores marketplaces ID only
+      apiError: null,
+      isFormSubmited: false
     }
   }
 
@@ -36,36 +38,82 @@ class MWSActionDomain extends Component {
 
   nextAction = () => {
     const { marketplaceDomains } = this.state
+    const { signupFields } = this.props
+    const seller_id = signupFields.seller_id
 
     if ( marketplaceDomains ){
-      this.props.setSignupFields({ // redux
-        ...this.props.signupFields,
-        marketplace_domains: marketplaceDomains
+
+      this.setState({
+        isFormSubmited: true,
+        apiError: null
       })
-      this.props.setSignupStep(3);
+
+      const marketplaceData = signupFields.authenticated_marketplace.map((x) => {
+        return {
+          sellerId: seller_id,
+          marketPlaceId: x.MarketplaceId,
+          name: x.Name,
+          domainName: x.DomainName,
+          countryCode: x.DefaultCountryCode
+        }
+      })
+
+      const filteredMarketplaces = marketplaceData.filter( x =>
+        marketplaceDomains.indexOf(x.marketPlaceId) !== -1)
+
+      filteredMarketplaces.forEach( (obj, index) => {
+        //save one by one
+        api
+        .post(`SaveMarketPlaceIds`, obj)
+        .then((res) => {
+          console.log('backend responce to POST SaveMarketPlaceIds', res)
+          if ( !res.data.IsSuccess ){
+            this.setState({
+              apiError: res.data.ErrorMessage
+            })
+          }
+
+          // update state for the last request
+          if ( index === filteredMarketplaces.length - 1 ){
+            this.props.setSignupFields({ // redux
+              ...this.props.signupFields,
+              marketplace_domains: marketplaceDomains
+            })
+            this.props.setSignupStep(3);
+
+            this.setState({
+              isFormSubmited: false // reset submit status
+            })
+          }
+
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      })
+
+
     }
   }
 
   render(){
-    const { marketplaceDomains } = this.state
+    const { marketplaceDomains, isFormSubmited, apiError } = this.state
+    const { signupFields } = this.props
 
-    const options = [
-      {
-        name: "com.mx",
-        text: "www.amazon.com.mx"
-      },
-      {
-        name: "com.ca",
-        text: "www.amazon.com.ca"
-      },
-      {
-        name: "com",
-        text: "www.amazon.com"
+    const options = signupFields.authenticated_marketplace.map(x => {
+      return {
+        id: x.MarketplaceId,
+        name: x.Name,
+        text: x.DomainName
       }
-    ]
+    })
 
     return(
-      <React.Fragment>
+      <div className={"loader-container " + (isFormSubmited ? "is-loading" : null) }>
+        <FormLoader />
+        { apiError &&
+          <span className="ui-input-validation">{apiError}</span>
+        }
         <p className="t-parapgraph"><strong>Add Marketplaces to your SellerPoint account: </strong></p>
         <div className="signup__checkboxes">
           { options.map((cb, i) => {
@@ -73,8 +121,8 @@ class MWSActionDomain extends Component {
               <CheckBox
                 name={cb.name}
                 text={cb.text}
-                clickHandler={this.chooseOption.bind(this, (i + 1))}
-                isActive={marketplaceDomains.indexOf(i+1) !== -1}
+                clickHandler={this.chooseOption.bind(this, cb.id)}
+                isActive={marketplaceDomains.indexOf(cb.id) !== -1 }
               />
             )
           }) }
@@ -82,7 +130,7 @@ class MWSActionDomain extends Component {
         <div className="signup__form-cta signup__form-cta--centered">
           <span onClick={this.nextAction} className="btn btn-signup btn--block">Next</span>
         </div>
-      </React.Fragment>
+      </div>
     )
   }
 }
