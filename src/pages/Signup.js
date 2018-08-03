@@ -37,7 +37,7 @@ class Signup extends Component {
 
 
   render(){
-    const { signupStep, match } = this.props
+    const { match } = this.props
 
     return(
       <div className="signup">

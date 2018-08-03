@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Formsy from 'formsy-react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-import { setSignupStep, setSignupEmail, setSignupFields } from '../actions/signup';
+import { setSignupStep, setSignupEmail, setSignupId, setSignupFields } from '../actions/signup';
 import api from '../services/Api';
 import FormInput from '../components/FormInput';
 import PassMeter from '../components/PassMeter';
@@ -162,6 +162,7 @@ class SignupStep1 extends Component {
         if ( res.data.IsSuccess ){
           // this.props.setSignupId(res.data.id); // TODO
           this.props.setSignupEmail(res.config.data.email);
+          this.props.setSignupId(res.data.ClientId);
           this.updateSignup();
         } else {
           this.setState({
@@ -307,7 +308,7 @@ class SignupStep1 extends Component {
               required
             />
             { this.state.passwords_match === false &&
-              <span className="ui-input-validation">Passwords didn't match</span>
+              <span className="ui-input-validation">Passwords did not match</span>
             }
             <div className="signup__captcha">
               <ReCAPTCHA
@@ -320,7 +321,7 @@ class SignupStep1 extends Component {
               <span className="ui-input-validation">Please enter captcha</span>
             }
             <div className="signup__rules">
-            By signing up, you are agreeing to KiniMetrix’s <br/><a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
+            By signing up, you are agreeing to KiniMetrix’s <br/><a href="http://qa.kinimetrix.com:8082/terms" target="_blank" rel="noopener noreferrer">Terms of Use</a> and <a href="http://qa.kinimetrix.com:8082/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
             </div>
             <div className="signup__form-cta">
               <button type="submit" className="btn btn-signup btn--block">Sign Up</button>
@@ -341,7 +342,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   setSignupStep: (data) => dispatch(setSignupStep(data)),
   setSignupFields: (data) => dispatch(setSignupFields(data)),
-  setSignupEmail: (data) => dispatch(setSignupEmail(data))
+  setSignupEmail: (data) => dispatch(setSignupEmail(data)),
+  setSignupId: (data) => dispatch(setSignupId(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupStep1);

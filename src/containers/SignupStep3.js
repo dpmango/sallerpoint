@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { setSignupStep, setSignupFields } from '../actions/signup';
-import SvgIcon from '../components/SvgIcon';
+// import SvgIcon from '../components/SvgIcon';
 
 class SignupStep3 extends Component {
   static propTypes = {

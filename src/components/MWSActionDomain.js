@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Formsy from 'formsy-react';
-import FormInput from '../components/FormInput';
-import Image from './Image';
 import CheckBox from './CheckBox';
 import FormLoader from './FormLoader';
 import api from '../services/Api';

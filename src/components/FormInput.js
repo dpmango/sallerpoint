@@ -19,7 +19,7 @@ class FormInput extends Component {
   }
 
   getInput = () => {
-    const { name, placeholder, mask, isRequired, label } = this.props
+    const { name, placeholder, mask } = this.props
     const type = this.props.type ? this.props.type : "text"
 
     if ( mask ){
