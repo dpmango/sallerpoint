@@ -74,6 +74,7 @@
     "react-router-dom": "^4.3.1",
     "react-snap": "^1.17.0",
     "react-text-mask": "^5.4.3",
+    "react-youtube": "^7.6.0",
     "redux": "^4.0.0",
     "require-dir": "^1.0.0",
     "resolve": "1.6.0",

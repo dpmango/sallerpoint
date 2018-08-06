@@ -1,0 +1,65 @@
+.i-progress
+  background: #6BB3D3
+  margin-top: 125px
+  padding: 10px 0
+  &__wrapper
+    display: flex
+    align-items: center
+  &__title
+    text-transform: uppercase
+    font-size: 18px
+    font-weight: bold
+    margin-right: 5%
+  &__bars
+    flex: 1 1 auto
+    display: flex
+    align-items: center
+    justify-content: space-between
+    margin-left: -10px
+    margin-right: -10px
+
+.i-bar
+  flex: 1 1 auto
+  padding-left: 10px
+  padding-right: 10px
+  display: flex
+  align-items: center
+  color: white
+  &__name
+    font-size: 14px
+    font-weight: bold
+    margin-right: 10px
+    flex: 0 0 auto
+  &__status
+    flex: 1 1 auto
+    max-width: 225px
+    position: relative
+    overflow: hidden
+    height: 18px
+    background: white
+    border-radius: 9px
+  &__progress
+    position: absolute
+    display: flex
+    align-items: center
+    justify-content: flex-end
+    left: 0
+    top: 0
+    bottom: 0
+    z-index: 1
+    background: #007D00
+    transition: .25s $ease
+    span
+      vertical-align: middle
+      font-size: 12px
+      line-height: 1
+      white-space: nowrap
+      font-weight: bold
+      display: inline-block
+      margin-right: 5px
+      margin-left: 5px
+    &.is-compleated
+      justify-content: center
+      span
+        margin-right: 0
+        margin-left: 0

@@ -21,6 +21,10 @@ class MWSActionRegion extends Component {
   }
 
   nextAction = () => {
+    
+    // open AWS tab
+    window.open("https://sellercentral.amazon.com/gp/mws/registration/register.html?signInPageDisplayed=1&amp;devAuth=1&amp;developerName=KiniMetrix&amp;devMWSAccountId=586216165313");
+
     this.props.setSignupAuthStep(
       this.props.signupAuthStep + 1
     )

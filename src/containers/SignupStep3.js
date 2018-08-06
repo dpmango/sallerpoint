@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { setSignupStep, setSignupFields } from '../actions/signup';
 // import SvgIcon from '../components/SvgIcon';
+import api from '../services/Api'
 
 class SignupStep3 extends Component {
   static propTypes = {
@@ -29,11 +30,10 @@ class SignupStep3 extends Component {
 
     options.push(id) // only push as it's imposible to deselect in design
 
-    setTimeout( () => { // emulate api
-      this.setState({
-        connectedId: options
-      })
-    }, 300)
+    this.LWAAuth();
+    this.setState({
+      connectedId: options
+    })
 
     // this.props.setSignupFields({
     //   ...this.props.signupFields,
@@ -41,6 +41,19 @@ class SignupStep3 extends Component {
     //     ..this.props.signupFields.filteredMarketplaces,
     //   ]
     // })
+  }
+
+  LWAAuth = () => {
+    // "On button click redirect user to below URL where user enters his LWA credentials
+    // https://www.amazon.com/ap/oa?client_id={ClientID}&amp;scope=cpc_advertising:campaign_management&amp;response_type=code&amp;redirect_uri={RedirectUri}
+    //
+    // ClientId: amzn1.application-oa2-client.c66f0420a8fc4c13a7abb409399d9944
+    // RedirectUri : URL of step 3 or server side action that reads the advertising info and stores into DB"
+
+    const ClientID = "amzn1.application-oa2-client.c66f0420a8fc4c13a7abb409399d9944"
+    const RedirectUri = window.location.host + "/LWACallback"
+    window.open(`https://www.amazon.com/ap/oa?client_id=${ClientID}&scope=cpc_advertising:campaign_management&response_type=code&redirect_uri=${RedirectUri}`)
+
   }
 
   compleateSignup = () => {

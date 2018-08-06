@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="25px" viewBox="0 0 34 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>mail</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Welcome-Page" transform="translate(-263.000000, -351.000000)" fill-rule="nonzero">
+            <g id="Group" transform="translate(241.000000, 331.000000)">
+                <g id="mail" transform="translate(22.000000, 20.000000)">
+                    <path d="M1,2.00359486 L1,22.9964051 C1,23.5552874 1.44501342,24 1.9999204,24 L32.0000796,24 C32.553902,24 33,23.5525487 33,22.9964051 L33,2.00359486 C33,1.4447126 32.5549866,1 32.0000796,1 L1.9999204,1 C1.44609796,1 1,1.44745132 1,2.00359486 Z M0,2.00359486 C0,0.897039974 0.891941149,0 1.9999204,0 L32.0000796,0 C33.1046051,0 34,0.889763236 34,2.00359486 L34,22.9964051 C34,24.10296 33.1080589,25 32.0000796,25 L1.9999204,25 C0.895394863,25 0,24.1102368 0,22.9964051 L0,2.00359486 Z" id="Rectangle-3" fill="#000000"></path>
+                    <polygon id="Path-2" fill="#383838" points="32.0990584 1.21089095 32.8100325 1.91410905 17 17.898517 1.18996745 1.91410905 1.90094164 1.21089095 17 16.476483"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
