@@ -12,3 +12,90 @@
   &__subtitle
     font-size: 18px
     font-weight: bold
++r($desktop)
+  .dash
+    &__heading
+
+    &__title
+      font-size: 42px
+      margin: .5em 0 .2em
+    &__subtitle
+      font-size: 16px
+
++r($mobile)
+  .dash
+    &__title
+      font-size: 34px
+    &__subtitle
+      font-size: 15px
+
+
+.dash-info
+  position: relative
+  background: #FFF2DE
+  border: 1px solid #CCCCCC
+  border-radius: 3px
+  padding: 20px 20px 20px 70px
+  margin: 25px auto
+  max-width: 870px
+  color: #4A4A4A
+  &__icon
+    position: absolute
+    top: 20px
+    left: 20px
+    .ico-mail
+      font-size: 25px
+  p
+    font-size: 16px
+    margin-top: 0
+  ul
+    margin: 10px 0 20px
+    padding-left: 30px
+    li
+      display: block
+      position: relative
+      padding-left: 10px
+      margin-bottom: 20px
+      &::after
+        display: inline-block
+        content: ' '
+        position: absolute
+        left: 0
+        z-index: 1
+        top: 9px
+        background: currentColor
+        border-radius: 50%
+        size: 4px
+    a
+      font-weight: 500
+      color: #0A1E39
+      transition: .25s $ease
+      &:hover
+        color: $colorGreen
+
+  &__cta
+    text-align: center
+    margin-top: 20px
+    // margin-left: 15px
+
++r($mobile)
+  .dash-info
+    padding: 20px 20px 20px 60px
+    margin-left: -20px
+    margin-right: -20px
+    border-color: transparent
+    border-radius: 0
+    p
+      font-size: 15px
+    ul
+      font-size: 15px
+      padding-left: 15px
+      li
+        margin-bottom: 15px
+    &__cta
+      margin-left: -40px
+      // text-align: left
+    &__icon
+      .ico-mail
+        font-size: 20px
+        left: 15px

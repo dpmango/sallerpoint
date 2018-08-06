@@ -63,3 +63,24 @@
       span
         margin-right: 0
         margin-left: 0
+
++r($desktop)
+  .i-progress
+    min-height: 40px
+    padding-top: 11px
+    &__title
+      display: none
+      // margin-right: 20px
+
++r($tablet)
+  .i-progress
+    margin-top: 90px
+    &__bars
+      display: block
+
+  .i-bar
+    margin-bottom: 13px
+    &:last-child
+      margin-bottom: 0
+    &__name
+      flex-basis: 100px

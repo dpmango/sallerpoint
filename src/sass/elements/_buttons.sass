@@ -31,6 +31,25 @@ button
     background-color: $colorBlue
     color: white
 
+.btn-primary
+  background: transparent
+  color: #383838
+  font-size: 18px
+  font-weight: bold
+  padding: 14px 50px
+  border-radius: 6px
+  border: 1px solid #1D3049
+  color: #1D3049
+  &:hover
+    background-color: $colorBlue
+    color: white
+
++r($mobile)
+  .btn-primary
+    font-size: 16px
+    padding-left: 25px
+    padding-right: 25px
+    
 .btn-connect
   background: transparent
   font-size: 14px
