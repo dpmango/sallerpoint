@@ -10,3 +10,5 @@ export const SET_SIGNUP_FIELDS = 'SET_SIGNUP_FIELDS';
 
 export const LOG_IN = 'LOG_IN';
 export const LOG_OUT = 'LOG_OUT';
+
+export const SET_LWA_AUTH = 'SET_LWA_AUTH';

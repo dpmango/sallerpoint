@@ -30,6 +30,11 @@ export const Signup = MyLoadable({
   modules: ['./pages/Signup'],
   webpack: () => [require.resolveWeak('./pages/Signup')]
 });
+export const LWACallback = MyLoadable({
+  loader: () => import("./pages/LWACallback"),
+  modules: ['./pages/LWACallback'],
+  webpack: () => [require.resolveWeak('./pages/LWACallback')]
+});
 export const NotFound = MyLoadable({
   loader: () => import("./pages/NotFound"),
   modules: ['./pages/NotFound'],
@@ -59,6 +64,11 @@ export const routes = [
     path: '/dash',
     name: 'Dashboard',
     component: Dashboard
+  },
+  {
+    path: '/LWACallback',
+    name: 'LWACallback',
+    component: LWACallback
   },
   {
     path: '',

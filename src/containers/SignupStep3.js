@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { setSignupStep, setSignupFields } from '../actions/signup';
 // import SvgIcon from '../components/SvgIcon';
+import FormLoader from '../components/FormLoader';
 import api from '../services/Api'
 
 class SignupStep3 extends Component {
@@ -21,38 +22,66 @@ class SignupStep3 extends Component {
 
     this.state = {
       connectedId: [],
-      shouldRedirect: false
+      shouldRedirect: false,
+      isFormSubmited: false
     }
   }
 
-  connectMarketplace = (id) => {
+  connectMarketplace = (marketPlaceId, sellerId) => {
+    const { LWA, signupId } = this.props;
     const options = this.state.connectedId
 
-    options.push(id) // only push as it's imposible to deselect in design
+    if ( !LWA.resp.code ){
+      this.LWAAuth();
+    } else {
 
-    this.LWAAuth();
-    this.setState({
-      connectedId: options
-    })
+      this.setState({
+        isFormSubmited: true
+      })
 
-    // this.props.setSignupFields({
-    //   ...this.props.signupFields,
-    //   connected_marketplaces: [
-    //     ..this.props.signupFields.filteredMarketplaces,
-    //   ]
-    // })
+      const obj = {
+        code: LWA.resp.code,
+        scope: LWA.resp.scope,
+        clientId: signupId,
+        sellerId: sellerId
+      }
+
+      console.log(obj)
+      
+      api
+        .post(`ConnectAdvertisingData`, obj)
+        .then((res) => {
+          console.log('backend responce to POST ConnectAdvertisingData', res)
+
+          if ( res.IsSuccess ){
+            options.push(marketPlaceId) // only push as it's imposible to deselect in design
+
+            this.setState({
+              connectedId: options
+            })
+          } else {
+            // refresh token
+            this.LWAAuth();
+          }
+
+          this.setState({
+            isFormSubmited: false
+          })
+
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+    }
   }
 
   LWAAuth = () => {
     // "On button click redirect user to below URL where user enters his LWA credentials
-    // https://www.amazon.com/ap/oa?client_id={ClientID}&amp;scope=cpc_advertising:campaign_management&amp;response_type=code&amp;redirect_uri={RedirectUri}
-    //
-    // ClientId: amzn1.application-oa2-client.c66f0420a8fc4c13a7abb409399d9944
-    // RedirectUri : URL of step 3 or server side action that reads the advertising info and stores into DB"
 
     const ClientID = "amzn1.application-oa2-client.c66f0420a8fc4c13a7abb409399d9944"
-    const RedirectUri = window.location.host + "/LWACallback"
-    window.open(`https://www.amazon.com/ap/oa?client_id=${ClientID}&scope=cpc_advertising:campaign_management&response_type=code&redirect_uri=${RedirectUri}`)
+    const RedirectUri = window.location.origin + "/SellerPoint/LWACallback"
+    window.location.href = `https://www.amazon.com/ap/oa?client_id=${ClientID}&scope=cpc_advertising:campaign_management&response_type=code&redirect_uri=${RedirectUri}`
 
   }
 
@@ -65,7 +94,7 @@ class SignupStep3 extends Component {
   }
 
   render(){
-    const { connectedId, shouldRedirect } = this.state;
+    const { connectedId, shouldRedirect, isFormSubmited } = this.state;
     const { signupFields } = this.props;
 
     if ( shouldRedirect ){
@@ -81,7 +110,9 @@ class SignupStep3 extends Component {
 
     return(
       <div className="signup__container signup__container--wide">
-        <div className="signup__form">
+        <div className={"loader-container " + (isFormSubmited ? "is-loading" : null) }>
+          <FormLoader />
+            <div className="signup__form">
           <div className="signup__heading">Set up your advertising data by connecting your Sponsored Products so we can help you manage the effectiveness of your campaigns</div>
           <table className="signup__table">
             <thead>
@@ -102,7 +133,7 @@ class SignupStep3 extends Component {
                     <td>
                       {isConnected ?
                         <span className="signup__table-connection"><span className="ico-checkmark"></span> Connected</span> :
-                        <span className="btn btn-connect" onClick={this.connectMarketplace.bind(this, mp.marketPlaceId)}>Connect</span>
+                        <span className="btn btn-connect" onClick={this.connectMarketplace.bind(this, mp.marketPlaceId, mp.sellerId)}>Connect</span>
                       }
                     </td>
                   </tr>
@@ -113,6 +144,7 @@ class SignupStep3 extends Component {
           <div className="signup__form-cta signup__form-cta--centered">
             <span onClick={this.compleateSignup} className="btn btn-signup btn--block">Complete</span>
           </div>
+          </div>
         </div>
       </div>
     )
@@ -122,6 +154,8 @@ class SignupStep3 extends Component {
 
 const mapStateToProps = (state) => ({
   signupFields: state.signup.fields,
+  signupId: state.signup.signupId,
+  LWA: state.lwa
 });
 
 const mapDispatchToProps = (dispatch) => ({

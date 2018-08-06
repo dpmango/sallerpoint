@@ -8,6 +8,7 @@ const api = axios.create({
   baseURL: BACKEND_URL,
   headers: {
     'authToken': store.getState().login.authToken,
+    // 'withCredentials': true,
     'Content-Type': 'application/json',
     'Accept': 'application/json',
     'X-Requested-With': 'XMLHttpRequest'
