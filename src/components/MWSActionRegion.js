@@ -21,9 +21,9 @@ class MWSActionRegion extends Component {
   }
 
   nextAction = () => {
-    
+
     // open MWS authorization page
-      window.open("https://sellercentral.amazon.com/gp/mws/registration/register.html?signInPageDisplayed=1&devAuth=1&developerName=KiniMetrix&devMWSAccountId=586216165313");
+    window.open("https://sellercentral.amazon.com/gp/mws/registration/register.html?signInPageDisplayed=1&devAuth=1&developerName=KiniMetrix&devMWSAccountId=586216165313");
 
     this.props.setSignupAuthStep(
       this.props.signupAuthStep + 1

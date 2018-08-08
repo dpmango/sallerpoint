@@ -37,6 +37,7 @@ class MWSActionDomain extends Component {
     const { marketplaceDomains } = this.state
     const { signupFields } = this.props
     const seller_id = signupFields.seller_id
+    const mws_auth = signupFields.mws_auth
 
     if ( marketplaceDomains ){
 
@@ -47,7 +48,7 @@ class MWSActionDomain extends Component {
 
       const marketplaceData = signupFields.authenticated_marketplace.map((x) => {
         return {
-          sellerId: seller_id,
+          // sellerId: seller_id, // move to 1lvl up
           marketPlaceId: x.MarketplaceId,
           name: x.Name,
           domainName: x.DomainName,
@@ -58,42 +59,79 @@ class MWSActionDomain extends Component {
       const filteredMarketplaces = marketplaceData.filter( x =>
         marketplaceDomains.indexOf(x.marketPlaceId) !== -1)
 
-      filteredMarketplaces.forEach( (obj, index) => {
-        //save one by one
-        api
+
+      const obj = {
+        clientId: this.props.signupId,
+        sellerId: seller_id,
+        authToken: mws_auth,
+        marketplaces: filteredMarketplaces
+      }
+
+      //butch save
+      api
         .post(`SaveMarketPlaceIds`, obj)
         .then((res) => {
           console.log('backend responce to POST SaveMarketPlaceIds', res)
-          if ( !res.data.IsSuccess ){
-            this.setState({
-              apiError: res.data.ErrorMessage
-            })
-          }
-
-          // update state for the last request
-          if ( index === filteredMarketplaces.length - 1 ){
+          if ( res.data.IsSuccess ){
             this.props.setSignupFields({ // redux
               ...this.props.signupFields,
               marketplace_domains: marketplaceDomains,
-              connected_marketplaces: filteredMarketplaces
+              // connected_marketplaces: filteredMarketplaces
             })
 
             this.props.setSignupAuthStep(1); // reset ?
             this.props.setSignupStep(3);
 
+          } else {
             this.setState({
-              isFormSubmited: false // reset submit status
+              apiError: res.data.ErrorMessage
             })
           }
+
+          this.setState({
+            isFormSubmited: false // reset submit status
+          })
 
         })
         .catch(function (error) {
           console.log(error);
         });
-      })
 
+      // filteredMarketplaces.forEach( (obj, index) => {
+      //   //save one by one
+      //   api
+      //   .post(`SaveMarketPlaceIds`, obj)
+      //   .then((res) => {
+      //     console.log('backend responce to POST SaveMarketPlaceIds', res)
+      //     if ( !res.data.IsSuccess ){
+      //       this.setState({
+      //         apiError: res.data.ErrorMessage
+      //       })
+      //     }
+      //
+      //     // update state for the last request
+      //     if ( index === filteredMarketplaces.length - 1 ){
+      //       this.props.setSignupFields({ // redux
+      //         ...this.props.signupFields,
+      //         marketplace_domains: marketplaceDomains,
+      //         connected_marketplaces: filteredMarketplaces
+      //       })
+      //
+      //       this.props.setSignupAuthStep(1); // reset ?
+      //       this.props.setSignupStep(3);
+      //
+      //       this.setState({
+      //         isFormSubmited: false // reset submit status
+      //       })
+      //     }
+      //
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //   });
+      // })
 
-    }
+    } // end if
   }
 
   render(){
@@ -136,6 +174,7 @@ class MWSActionDomain extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  signupId: state.signup.signupId,
   signupFields: state.signup.fields,
   signupAuthStep: state.signup.signupAuthStep
 });

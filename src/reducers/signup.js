@@ -17,7 +17,7 @@ export const initialState = {
     mws_auth: '',
     authenticated_marketplace: null,
     marketplace_domains: [], //id's of authenticated marketplaces thats been choosen
-    connected_marketplaces: []
+    // connected_marketplaces: [] // will be requested from API
   }
 }
 
