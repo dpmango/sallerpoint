@@ -196,6 +196,19 @@ class SignupStep1 extends Component {
       password: password
     })
 
+    this.updateStepOnBackend()
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+
+      });
+
+  }
+
+  async updateStepOnBackend(){
+    const res = await api.post('UpdateCurrentStepAsync?step=ConnectSellerCentral');
+    return await res.data;
   }
 
 

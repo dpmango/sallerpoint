@@ -83,6 +83,14 @@ class MWSActionDomain extends Component {
             this.props.setSignupAuthStep(1); // reset ?
             this.props.setSignupStep(3);
 
+            this.updateStepOnBackend()
+              .then(res => {
+                console.log(res)
+              })
+              .catch(err => {
+
+              });
+              
           } else {
             this.setState({
               apiError: res.data.ErrorMessage
@@ -98,42 +106,14 @@ class MWSActionDomain extends Component {
           console.log(error);
         });
 
-      // filteredMarketplaces.forEach( (obj, index) => {
-      //   //save one by one
-      //   api
-      //   .post(`SaveMarketPlaceIds`, obj)
-      //   .then((res) => {
-      //     console.log('backend responce to POST SaveMarketPlaceIds', res)
-      //     if ( !res.data.IsSuccess ){
-      //       this.setState({
-      //         apiError: res.data.ErrorMessage
-      //       })
-      //     }
-      //
-      //     // update state for the last request
-      //     if ( index === filteredMarketplaces.length - 1 ){
-      //       this.props.setSignupFields({ // redux
-      //         ...this.props.signupFields,
-      //         marketplace_domains: marketplaceDomains,
-      //         connected_marketplaces: filteredMarketplaces
-      //       })
-      //
-      //       this.props.setSignupAuthStep(1); // reset ?
-      //       this.props.setSignupStep(3);
-      //
-      //       this.setState({
-      //         isFormSubmited: false // reset submit status
-      //       })
-      //     }
-      //
-      //   })
-      //   .catch(function (error) {
-      //     console.log(error);
-      //   });
-      // })
-
     } // end if
   }
+
+  async updateStepOnBackend(){
+    const res = await api.post('UpdateCurrentStepAsync?step=ConnectAdvertising');
+    return await res.data;
+  }
+
 
   render(){
     const { marketplaceDomains, isFormSubmited, apiError } = this.state

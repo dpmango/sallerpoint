@@ -129,6 +129,20 @@ class SignupStep3 extends Component {
     this.setState({
       shouldRedirect: true
     })
+
+    this.compleateSignupOnBackend()
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+
+      });
+
+  }
+
+  async compleateSignupOnBackend(){
+    const res = await api.post('SignUpComplete');
+    return await res.data;
   }
 
   render(){
