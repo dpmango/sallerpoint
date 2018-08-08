@@ -21,15 +21,51 @@ class SignupStep3 extends Component {
     super(props)
 
     this.state = {
-      connectedId: [],
+      // connectedId: [],
       shouldRedirect: false,
-      isFormSubmited: false
+      isFormSubmited: false,
+      sellerMarketplaces: [],
+      apiError: null
     }
+  }
+
+  componentDidMount(){
+    this.getSellerMarketplaces();
+  }
+
+  getSellerMarketplaces = () => {
+
+    const {signupId} = this.props
+    // const signupId = 3212 // for testing
+
+    api
+      .get(`GetSellerMarketPlaces?ClientId=${signupId}`)
+      .then((res) => {
+        console.log('backend responce to GET GetSellerMarketPlaces', res)
+
+        if ( res.data.IsSuccess ){
+
+          // filter out unavaiable ?
+          const availableMarketplaces = res.data.Marketplaces.filter( x => x.IsAdvertisingAvailable)
+
+          this.setState({
+            sellerMarketplaces: availableMarketplaces
+          })
+        } else {
+          this.setState({
+            apiError: res.data.ErrorMessage
+          })
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
   }
 
   connectMarketplace = (marketPlaceId, sellerId) => {
     const { LWA, signupId } = this.props;
-    const options = this.state.connectedId
+    // const options = this.state.connectedId
 
     if ( !LWA.resp.code ){
       this.LWAAuth();
@@ -46,19 +82,21 @@ class SignupStep3 extends Component {
         sellerId: sellerId
       }
 
-      console.log(obj)
-      
       api
         .post(`ConnectAdvertisingData`, obj)
         .then((res) => {
           console.log('backend responce to POST ConnectAdvertisingData', res)
 
-          if ( res.IsSuccess ){
-            options.push(marketPlaceId) // only push as it's imposible to deselect in design
+          if ( res.data.IsSuccess ){
+            // options.push(marketPlaceId) // only push as it's imposible to deselect in design
 
-            this.setState({
-              connectedId: options
-            })
+            // this.setState({
+            //   connectedId: options
+            // })
+
+            // instead of connectedID from state, just get new state from API
+            this.getSellerMarketplaces()
+
           } else {
             // refresh token
             this.LWAAuth();
@@ -94,7 +132,7 @@ class SignupStep3 extends Component {
   }
 
   render(){
-    const { connectedId, shouldRedirect, isFormSubmited } = this.state;
+    const { connectedId, shouldRedirect, isFormSubmited, sellerMarketplaces, apiError } = this.state;
     const { signupFields } = this.props;
 
     if ( shouldRedirect ){
@@ -112,39 +150,44 @@ class SignupStep3 extends Component {
       <div className="signup__container signup__container--wide">
         <div className={"loader-container " + (isFormSubmited ? "is-loading" : null) }>
           <FormLoader />
+          { apiError &&
+            <span className="ui-input-validation">{apiError}</span>
+          }
             <div className="signup__form">
-          <div className="signup__heading">Set up your advertising data by connecting your Sponsored Products so we can help you manage the effectiveness of your campaigns</div>
-          <table className="signup__table">
-            <thead>
-              <tr>
-                { tableHeads.map( (name,index) => {
-                  return ( <td key={index}>{name}</td> )
-                }) }
-              </tr>
-            </thead>
-            <tbody>
-              { signupFields.connected_marketplaces.map( (mp, index) => {
-                const isConnected = connectedId.indexOf(mp.marketPlaceId) !== -1
-                return (
-                  <tr key={index}>
-                    <td><span className="for-desktop">{tableHeads[0]}</span>{mp.name}</td>
-                    <td><span className="for-desktop">{tableHeads[1]}</span>{mp.sellerId}</td>
-                    <td><span className="for-desktop">{tableHeads[2]}</span>{isConnected ? mp.connectionStatus : "Initial import in progress" }</td>
-                    <td>
-                      {isConnected ?
-                        <span className="signup__table-connection"><span className="ico-checkmark"></span> Connected</span> :
-                        <span className="btn btn-connect" onClick={this.connectMarketplace.bind(this, mp.marketPlaceId, mp.sellerId)}>Connect</span>
-                      }
-                    </td>
+              <div className="signup__heading">Set up your advertising data by connecting your Sponsored Products so we can help you manage the effectiveness of your campaigns</div>
+              <table className="signup__table">
+                <thead>
+                  <tr>
+                    { tableHeads.map( (name,index) => {
+                      return ( <td key={index}>{name}</td> )
+                    }) }
                   </tr>
-                )
-              }) }
-            </tbody>
-          </table>
-          <div className="signup__form-cta signup__form-cta--centered">
-            <span onClick={this.compleateSignup} className="btn btn-signup btn--block">Complete</span>
-          </div>
-          </div>
+                </thead>
+                { sellerMarketplaces &&
+                  <tbody>
+                    { sellerMarketplaces.map( (mp, index) => {
+                      const isConnected = mp.IsAdvertisingConnected
+                      return (
+                        <tr key={index}>
+                          <td><span className="for-desktop">{tableHeads[0]}</span>{mp.Name}</td>
+                          <td><span className="for-desktop">{tableHeads[1]}</span>{mp.SellerId}</td>
+                          <td><span className="for-desktop">{tableHeads[2]}</span>{mp.MWSStatus}</td>
+                          <td>
+                            {isConnected ?
+                              <span className="signup__table-connection"><span className="ico-checkmark"></span> Connected</span> :
+                              <span className="btn btn-connect" onClick={this.connectMarketplace.bind(this, mp.MarketPlaceId, mp.SellerId)}>Connect</span>
+                            }
+                          </td>
+                        </tr>
+                      )
+                    }) }
+                  </tbody>
+                }
+              </table>
+              <div className="signup__form-cta signup__form-cta--centered">
+                <span onClick={this.compleateSignup} className="btn btn-signup btn--block">Complete</span>
+              </div>
+            </div>
         </div>
       </div>
     )

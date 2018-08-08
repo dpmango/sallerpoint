@@ -62,7 +62,7 @@ class MWSActionAuth extends Component {
       isFormSubmited: true
     })
 
-    // authenticate 
+    // authenticate
     api
       .post(`AuthenticateMWSDetails`, leadObj)
       .then((res) => {

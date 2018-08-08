@@ -67,6 +67,7 @@ class MWSActionDomain extends Component {
         marketplaces: filteredMarketplaces
       }
 
+      console.log('POST obj', obj)
       //butch save
       api
         .post(`SaveMarketPlaceIds`, obj)
