@@ -19,7 +19,7 @@ class Alert extends Component {
   render(){
 
     return(
-      <div className="alert" style={{"background-color": this.color}}>
+      <div className="alert" style={{"backgroundColor": this.color}}>
         {this.props.content}
       </div>
     )
