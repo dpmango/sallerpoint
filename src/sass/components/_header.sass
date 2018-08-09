@@ -39,6 +39,12 @@
       padding: 5px
       border: 1px solid black
 
+  &__welcome-link
+    display: none
+    margin-left: auto
+    max-width: 350px
+    flex: 0 1 auto
+
   &--logo-only
     .header
       position: absolute
@@ -47,6 +53,12 @@
         pointer-events: none
     .mobile-navi
       position: absolute
+
+  &--dash-welcome
+    .header
+      &__welcome-link
+        display: block
+
 
 .is-scrolled:not(.header--logo-only)
   .header

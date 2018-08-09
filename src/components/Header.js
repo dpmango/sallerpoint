@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import onClickOutside from "react-onclickoutside";
@@ -81,6 +82,9 @@ class Header extends React.Component {
               <NavLink onClick={this.closeHamburger} to='/' className="header__logo">
                 <SvgIcon name="logo" />
               </NavLink>
+              <div className="header__welcome-link">
+                <Link to={`${process.env.PUBLIC_URL}/dash/index`} className="btn btn-welcome">Go straight to dashboards</Link>
+              </div>
               <div className="header__hamburger">
                 <div
                   className={"hamburger hamburger--squeeze " + (menuOpened ? "is-active" : "" ) }
