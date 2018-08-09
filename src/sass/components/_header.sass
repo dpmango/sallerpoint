@@ -45,6 +45,117 @@
     max-width: 350px
     flex: 0 1 auto
 
+  &__dash-nav
+    display: none
+    list-style: none
+    margin: 0
+    padding: 0
+    li
+      display: inline-block
+      margin-right: 30px
+      &:last-child
+        margin-right: 0
+    a
+      display: inline-block
+      text-align: center
+      &.is-active
+        .header__dash-icon
+          background: #14A2E7
+      span
+        // aka anchor
+        font-size: 10px
+        font-weight: bold
+        color: white
+        margin-top: 3px
+        text-align: center
+
+  &__dash-icon
+    display: flex
+    align-items: center
+    justify-content: center
+    border-radius: 9px
+    min-size: 60px
+    color: white
+    background: #9B9B9B
+    .ico-dash-nav
+      &-dashboards
+        font-size: 46px
+      &-planning
+        font-size: 41px
+      &-settings
+        font-size: 44px
+
+  &__user
+    margin-left: auto
+    // none is toggled with modifier
+    display: none
+    align-items: center
+    cursor: pointer
+    &-avatar
+      size: 54px
+      border-radius: 50%
+      position: relative
+      overflow: hidden
+      z-index: 1
+      margin-right: 10px
+      background: #D8D8D8
+      img
+        max-width: 100%
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%,-50%)
+
+    &-name
+      margin-right: 10px
+      font-size: 16px
+      font-weight: 500
+
+    &-dropdown
+      position: relative
+
+    &-dropdown-arow
+      font-size: 0
+    .ico
+      font-size: 11px
+      // color: white
+
+    &.is-active
+      .header__dropdown
+        opacity: 1
+        transform: translate(0,0)
+        pointer-events: all
+
+
+  &__dropdown
+    position: absolute
+    right: 0
+    top: 50px
+    min-width: 220px
+    transition: .25s $ease
+    opacity: 0
+    pointer-events: none
+    transform: translate(0,10px)
+
+    &-menu
+      list-style: none
+      margin: 0
+      padding: 0
+      background: white
+      border-radius: 6px
+      font-size: 16px
+      overflow: hidden
+      li
+        display: block
+        color: $fontColor
+      a
+        display: block
+        padding: 10px 15px
+        transition: .25s $ease
+        &:hover
+          background: #F1F1F1
+
+
   &--logo-only
     .header
       position: absolute
@@ -58,6 +169,13 @@
     .header
       &__welcome-link
         display: block
+
+  &--dash
+    .header
+      &__dash-nav
+        display: flex
+      &__user
+        display: flex
 
 
 .is-scrolled:not(.header--logo-only)

@@ -24,8 +24,7 @@ class DashboardPlannings extends Component {
         <div className="dash">
           <div className="container container--narrow">
             <div className="dash__heading">
-              <h1 className="dash__title">Dashboards page</h1>
-              <div className="dash__subtitle">While we wait for your data to load, we have some interesting things to show you.</div>
+              <h1 className="dash__title">Plannings page</h1>
             </div>
           </div>
         </div>

@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
 import onClickOutside from "react-onclickoutside";
 // import throttle from 'lodash/throttle';
 
@@ -18,15 +17,16 @@ class Header extends React.Component {
     closeMenu: PropTypes.func
   };
 
-  // constructor(props){
-  //   super(props);
-  //
-  //   // this.scrollWithThrottle = throttle(this.handleScroll, 200);
-  //
-  //   // this.state = {
-  //   //   isScrolled: false
-  //   // }
-  // }
+  constructor(props){
+    super(props);
+
+    // this.scrollWithThrottle = throttle(this.handleScroll, 200);
+
+    this.state = {
+      isScrolled: false,
+      isMenuOpened: false
+    }
+  }
 
   componentDidMount() {
     // window.addEventListener('scroll', this.scrollWithThrottle, false);
@@ -63,15 +63,30 @@ class Header extends React.Component {
   }
 
   handleClickOutside = () => {
-    this.closeHamburger()
+    this.closeHamburger();
+    this.setState({
+      isMenuOpened: false
+    })
   };
 
   preloaderOnHover = (component) => {
     component.preload();
   };
 
+  logOutUser = () => {
+    // destroy session
+
+  }
+
+  toggleUsermenu = () => {
+    this.setState({
+      isMenuOpened: !this.state.isMenuOpened
+    })
+  }
+
   render(){
 
+    const { isMenuOpened } = this.state;
     const { menuOpened } = this.props;
 
     return(
@@ -84,6 +99,61 @@ class Header extends React.Component {
               </NavLink>
               <div className="header__welcome-link">
                 <Link to={`${process.env.PUBLIC_URL}/dash/dashboards`} className="btn btn-welcome">Go straight to dashboards</Link>
+              </div>
+              <ul className="header__dash-nav">
+                <li>
+                  <NavLink to={`${process.env.PUBLIC_URL}/dash/dashboards`} className="" activeClassName="is-active">
+                    <div className="header__dash-icon">
+                      <SvgIcon name="dash-nav-dashboards"/>
+                    </div>
+                    <span>Dashboards</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to={`${process.env.PUBLIC_URL}/dash/plannings`} className="" activeClassName="is-active">
+                    <div className="header__dash-icon">
+                      <SvgIcon name="dash-nav-planning"/>
+                    </div>
+                    <span>Planning</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to={`${process.env.PUBLIC_URL}/dash/settings`} className="" activeClassName="is-active">
+                    <div className="header__dash-icon">
+                      <SvgIcon name="dash-nav-settings"/>
+                    </div>
+                    <span>Settings</span>
+                  </NavLink>
+                </li>
+              </ul>
+              <div
+                className={"header__user" + ( isMenuOpened ?  " is-active" : "") }
+                onClick={this.toggleUsermenu}
+              >
+                <div className="header__user-avatar">
+                  {/* SOME IMAGE TAG */}
+                </div>
+                <div className="header__user-name">
+                  BRITTANY DEMO
+                </div>
+                <div className={"header__user-dropdown"}>
+                  <div className="header__user-dropdown-arrow">
+                    <SvgIcon name="dropdown-arrow" />
+                  </div>
+                  <div className="header__dropdown">
+                    <div className="header__dropdown-menu">
+                      <li>
+                        <a href="">Some action</a>
+                      </li>
+                      <li>
+                        <a href="">Some action</a>
+                      </li>
+                      <li>
+                        <a href="" onClick={this.logOutUser}>Log out</a>
+                      </li>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className="header__hamburger">
                 <div
