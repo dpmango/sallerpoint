@@ -1,40 +1,64 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import { setHeaderClass } from '../actions/header';
 
-import DashboardWelcome from '../components/DashboardWelcome';
+import DashboardWelcome from '../containers/DashboardWelcome';
+import DashboardDashboards from '../containers/DashboardDashboards';
+import DashboardPlannings from '../containers/DashboardPlannings';
+import DashboardSettings from '../containers/DashboardSettings';
 
 class Dashboard extends Component {
-  static propTypes = {
-    setHeaderClass: PropTypes.func.isRequired
-  };
-
-  componentDidMount(){
-    this.props.setHeaderClass('header--dash-welcome');
-  }
-
 
   render(){
+    const { match } = this.props
+
     return(
-      <DashboardWelcome />
+      <React.Fragment>
+        <Route path={`${match.url}/:action`} component={DashboardSwitch} />
+        <Route
+          exact
+          path={match.url}
+          component={DashboardWelcome}
+        />
+      </React.Fragment>
     )
   }
 }
 
 
+class DashboardSwitch extends React.Component {
 
-const mapStateToProps = (state) => (
-  {
+  renderAction = () => {
+    const { match } = this.props;
+
+    const actionParam = match.params.action;
+
+    switch (actionParam) {
+      case 'dashboards':
+        return (
+          <DashboardDashboards />
+        )
+      case 'plannings':
+        return (
+          <DashboardPlannings />
+        )
+      case 'settings':
+        return (
+          <DashboardSettings />
+        )
+      default:
+        return <DashboardWelcome />
+    }
   }
-);
 
-const mapDispatchToProps = (dispatch) => (
-  {
-    setHeaderClass: (data) => dispatch(setHeaderClass(data))
+  render() {
+    return (
+      <React.Fragment>
+        {this.renderAction()}
+      </React.Fragment>
+    );
   }
-);
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default Dashboard

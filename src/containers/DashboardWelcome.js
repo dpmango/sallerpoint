@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import ImportProgress from './ImportProgress';
-import VideoList from './VideoList';
-import Alert from './Alert';
-import SvgIcon from './SvgIcon';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
+import ImportProgress from '../components/ImportProgress';
+import VideoList from '../components/VideoList';
+import Alert from '../components/Alert';
+import SvgIcon from '../components/SvgIcon';
 
-export default class DashboardWelcome extends Component {
+import { setHeaderClass } from '../actions/header';
+
+class DashboardWelcome extends Component {
+  static propTypes = {
+    setHeaderClass: PropTypes.func.isRequired
+  };
+
+  componentDidMount(){
+    this.props.setHeaderClass('header--dash-welcome');
+  }
+
   render(){
     return (
       <React.Fragment>
@@ -27,7 +39,7 @@ export default class DashboardWelcome extends Component {
                 <li>If you have any issues, please contact <a href="mailto:support@kinimetrix.com">support@kinimetrix.com</a></li>
               </ul>
               <div className="dash-info__cta">
-                <Link to={`${process.env.PUBLIC_URL}/dash/index`} className="btn btn-primary"> Go straight to dashboards </Link>
+                <Link to={`${process.env.PUBLIC_URL}/dash/dashboards`} className="btn btn-primary"> Go straight to dashboards </Link>
               </div>
             </div>
             <VideoList />
@@ -40,3 +52,17 @@ export default class DashboardWelcome extends Component {
     )
   }
 }
+
+
+const mapStateToProps = (state) => (
+  {
+  }
+);
+
+const mapDispatchToProps = (dispatch) => (
+  {
+    setHeaderClass: (data) => dispatch(setHeaderClass(data))
+  }
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardWelcome);

@@ -83,7 +83,7 @@ class Header extends React.Component {
                 <SvgIcon name="logo" />
               </NavLink>
               <div className="header__welcome-link">
-                <Link to={`${process.env.PUBLIC_URL}/dash/index`} className="btn btn-welcome">Go straight to dashboards</Link>
+                <Link to={`${process.env.PUBLIC_URL}/dash/dashboards`} className="btn btn-welcome">Go straight to dashboards</Link>
               </div>
               <div className="header__hamburger">
                 <div
