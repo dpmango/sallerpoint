@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import DashFilters from '../components/DashFilters';
 import DashSection from '../components/DashSection';
 
-
 export default class DashFinancialPerformance extends Component {
   render(){
 
@@ -22,7 +21,7 @@ export default class DashFinancialPerformance extends Component {
               qdt={{
                 type: 'QdtViz',
                 props: {
-                  id: 'PgaKBD', width: '1400px', height: '700px'
+                  id: 'PgaKBD', width: '100%', height: '450px'
                 },
               }}
             />

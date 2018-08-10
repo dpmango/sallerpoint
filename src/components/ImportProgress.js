@@ -22,16 +22,17 @@ class ImportProgress extends Component {
     this.getImportStatus();
 
     // this pull data
-    let checkAPI = setInterval( () => {
-      if ( this.state.FinanceDataImportProgress !== 100 &&
-           this.state.ReportDataImportProgress !== 100 &&
-           this.state.AdDataImportProgress !== 100
-      ){
-        this.getImportStatus();
-      } else {
-        clearInterval(checkAPI)
-      }
-    }, 1000) // ajax pooling
+    // let checkAPI = setInterval( () => {
+    //   if ( this.state.FinanceDataImportProgress !== 100 &&
+    //        this.state.ReportDataImportProgress !== 100 &&
+    //        this.state.AdDataImportProgress !== 100
+    //   ){
+    //     this.getImportStatus();
+    //   } else {
+    //     clearInterval(checkAPI)
+    //   }
+    // }, 1000) // ajax pooling
+
   }
 
   getImportStatus = () => {
@@ -45,7 +46,7 @@ class ImportProgress extends Component {
         console.log('backend responce to GET GetDataImportStatus', res)
 
         if ( res.data.IsSuccess ){
-  
+
           this.setState({
             FinanceDataImportProgress: res.data.FinanceDataImportProgress,
             ReportDataImportProgress: res.data.ReportDataImportProgress,

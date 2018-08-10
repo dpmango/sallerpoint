@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
-import QdtComponents from 'qdt-components';
-import api from '../services/Api'
-import axios from 'axios';
+// import QdtComponents from 'qdt-components';
+import QlikConnector, { GlobalQdtComponents } from './QlikConnector';
+
 
 class QdtComponent extends Component {
   static propTypes = {
@@ -14,64 +15,39 @@ class QdtComponent extends Component {
     super(props);
 
     this.state = {
-      isImageRequested: false,
       isConnected: false
     }
+
+    // this.qdtComponents = // import here
   }
 
-  componentDidMount() {
-    this.requestQlikImage();
+  componentDidMount(){
+    this.renderQdt();
   }
 
-  requestQlikImage = () => {
-    console.log('doing get resp to img', this.props.QlikData.QTicket)
-
-    const imgForSessionUrl = `${this.props.QlikData.QUrl}/resources/img/core/dark_noise_16x16.png?qlikTicket=${this.props.QlikData.QTicket}`
-
-    axios
-      .get(imgForSessionUrl)
-      .then(res => {
-        console.log('Qlik responce to GET dark_noise_16x16', res)
-
-        this.setState({
-          isImageRequested: true
-        }, () => {
-          this.connectQlik();
-        })
-
-
-      })
+  componentDidUpdate(){
+    this.renderQdt();
   }
 
-  connectQlik = () => {
 
-    const { QlikData } = this.props
-    const options = {
-      config: {
-        host: QlikData.QServer,
-        secure: QlikData.QSecure,
-        port: QlikData.QPort,
-        prefix: QlikData.VirtualProxy,
-        appId: QlikData.QlikAppId
-      },
-      connections: {
-        vizApi: true,
-        // engineApi: true
-      }
-    }
-
-    const qdtComponents = new QdtComponents(options.config, options.connections);
+  renderQdt = () => {
 
     const { type, props } = this.props;
-    qdtComponents.render(type, props, this.node);
+    const { QlikConnected } = this.props
+
+    if ( QlikConnected && GlobalQdtComponents ){
+      GlobalQdtComponents.render(type, props, this.node);
+    }
   }
 
   render() {
 
-    const { isImageRequested } = this.state;
+    // const { isConnected } = this.state;
+    const { QlikConnected } = this.props
     return (
       <React.Fragment>
-        { isImageRequested &&
+        <QlikConnector />
+        { QlikConnected &&
           <div ref={(node) => { this.node = node; }} />
         }
       </React.Fragment>
@@ -79,4 +55,16 @@ class QdtComponent extends Component {
   }
 }
 
-export default QdtComponent
+
+const mapStateToProps = (state) => ({
+  QlikConnected: state.qlik.connected,
+  QlickParams: state.qlik.params
+});
+
+const mapDispatchToProps = (dispatch) => ({
+
+});
+
+export { GlobalQdtComponents }
+
+export default connect(mapStateToProps, mapDispatchToProps)(QdtComponent);

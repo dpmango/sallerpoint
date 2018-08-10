@@ -107,6 +107,14 @@
 
 .dash-section
   margin: 20px 0
+  &.is-closed
+    .dash-section__toggler
+      .dash-section__toggler-icon
+        transform: rotate(180deg)
+    .dash-section__chart
+      height: 0
+      opacity: 0
+
   &__heading
     position: relative
     display: flex
@@ -115,5 +123,18 @@
     margin: 0
     font-size: 24px
     font-weight: bold
+    color: #383838
   &__chart
     margin: 15px 0
+    transition: .25s $ease
+    height: auto
+    position: relative
+    overflow: hidden
+
+  &__toggler
+    cursor: pointer
+    margin-right: 15px
+
+  &__toggler-icon
+    +arr(16,16,#FFC402,b)
+    transition: .25s $ease
