@@ -1,0 +1,84 @@
+.mobile-nav
+  display: none
+  position: absolute
+  top: 125px
+  left: 0
+  right: 0
+  z-index: 3
+  background: $colorBlue
+  color: white
+  opacity: 0
+  transform: translate(0,-10px)
+  pointer-events: none
+  transition: .25s $ease
+  &.is-active
+    opacity: 1
+    transform: translate(0,0)
+    pointer-events: all
+  &__wrapper
+    display: flex
+    flex-direction: column
+    // max-height: 100vh
+    // overflow-y: scroll
+    padding: 20px 0 40px
+
+  &__menu
+    li
+      display: block
+      margin-bottom: 10px
+    a
+      display: flex
+      align-items: center
+      padding: 5px
+      transition: .25s $ease
+      .ico
+        font-size: 18px
+        &-dash-nav
+          &-dashboards
+            font-size: 18px
+          &-planning
+            font-size: 16px
+          &-settings
+            font-size: 17px
+      &:hover
+        color: rgba(white, .7)
+      &.is-active
+        color: $colorYellow
+      span
+        display: inline-block
+        margin-left: 15px
+        font-size: 18px
+        font-weight: bold
+  &__icon
+    flex: 0 0 20px
+
+  &__user
+    margin-top: 30px
+    display: none
+
+
+// active only on header--dash
+.header--dash
+  .mobile-nav
+    +r($desktop)
+      display: block
+
++r($tablet)
+  .mobile-nav
+    top: 90px
+
++r(430)
+  .mobile-nav
+    &__user
+      display: flex
+    .header__user
+      position: relative
+      display: flex !important
+      margin-left: 0
+      &-name
+        display: block
+      &-dropdown
+        position: static
+    .header__dropdown
+      left: 0
+      right: auto

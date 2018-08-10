@@ -8,7 +8,6 @@
   max-height: 125px
   background: $colorBlue
   color: white
-  transition: box-shadow .25s $ease
   &__wrapper
     display: flex
     align-items: center
@@ -22,24 +21,11 @@
     color: $colorYellow
     .ico
       font-size: 72px
-    // font-family: $varelaFamily
-    // font-size: 38px
-    // line-height: .81
-    // span
-    //   font-size: 46px
-    //   display: block
-    //   text-transform: uppercase
-    //   line-height: .67
 
   &__hamburger
     display: none
-    margin-left: 25px
-    span
-      margin-left: 5px
-      display: inline-block
-      font-size: 10px
-      padding: 5px
-      border: 1px solid black
+    margin-right: 25px
+    margin-left: -10px
 
   &__welcome-link
     display: none
@@ -117,11 +103,11 @@
     &-dropdown
       position: relative
 
-    &-dropdown-arow
+    &-dropdown-arrow
       font-size: 0
-    .ico
-      font-size: 11px
-      // color: white
+      .ico
+        font-size: 11px
+        // color: white
 
     &.is-active
       .header__dropdown
@@ -139,7 +125,9 @@
     opacity: 0
     pointer-events: none
     transform: translate(0,10px)
-
+    box-shadow: 0px 10px 30px rgba($fontColor, .1)
+    border-radius: 6px
+    
     &-menu
       list-style: none
       margin: 0
@@ -194,9 +182,13 @@
 
 +r($desktop)
   .header
-    &__hamburger
-      margin-left: auto
-      // display: block
+    &--dash
+      .header
+        &__hamburger
+          display: block
+        &__dash-nav
+          display: none
+
 
 +r($tablet)
   .header
@@ -206,20 +198,35 @@
     &__wrapper
       padding: 20px 0
 
+    &__user
+      &-avatar
+        flex: 0 0 35px
+        size: 35px
+      &-name
+        // but it's hidden already
+        font-size: 14px
+      &-dropdown-arrow
+        .ico
+          font-size: 9px
+
+
 
 +r($mobile)
   .header
     &__wrapper
-      // padding: 23px 0
+
     &__logo
 
-    &__phone
 
 +r(430)
   .header
     &--dash-welcome
       .header
         &__welcome-link
+          display: none
+    &--dash
+      .header
+        &__user
           display: none
 
 +r(414)

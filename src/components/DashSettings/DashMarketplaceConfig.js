@@ -21,12 +21,21 @@ export default class DashMarketplaceConfig extends Component {
     })
   }
 
+  addNewMarketplace = () => {
+    // TODO
+    // what should happens ? LWA auth
+  }
+
   render(){
 
     return(
       <React.Fragment>
         <div className="dash-container">
           <div className="container container--full">
+            <div className="dash-new-marketplace">
+              <a className="btn btn-new-marketplace" onClick={this.addNewMarketplace}>Add New Marketplace</a>
+            </div>
+
             <ConnectMarketplaces
               onApiError={this.setApiError}
               onFormSubmited={this.onFormSubmited}

@@ -113,6 +113,16 @@ class Header extends React.Component {
         <header className='header'>
           <div className="container container--full">
             <div className="header__wrapper">
+              <div className="header__hamburger">
+                <div
+                  className={"hamburger hamburger--squeeze " + (menuOpened ? "is-active" : "" ) }
+                  onClick={this.toggleHamburger}>
+                  <div className="hamburger-box">
+                    <div className="hamburger-inner">
+                    </div>
+                  </div>
+                </div>
+              </div>
               <NavLink onClick={this.closeHamburger} to='/' className="header__logo">
                 <SvgIcon name="logo" />
               </NavLink>
@@ -141,19 +151,43 @@ class Header extends React.Component {
                 logOutUser={this.logOutUser}
                 isMenuOpened={this.state.isMenuOpened}
               />
-              <div className="header__hamburger">
-                <div
-                  className={"hamburger hamburger--squeeze " + (menuOpened ? "is-active" : "" ) }
-                  onClick={this.toggleHamburger}>
-                  <div className="hamburger-box">
-                    <div className="hamburger-inner">
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </header>
+
+        { /* Mobile navi */ }
+        <div className={"mobile-nav " + (menuOpened ? "is-active" : "" ) }>
+          <div className="container">
+            <div className="mobile-nav__wrapper">
+              <div className="mobile-nav__menu">
+                { dashNavLinks.map( (link, i) => {
+                  return(
+                    <li key={i}>
+                      <NavLink
+                        to={`${process.env.PUBLIC_URL + link.path}`}
+                        className=""
+                        activeClassName="is-active"
+                        onClick={this.toggleHamburger}
+                      >
+                        <div className="mobile-nav__icon">
+                          <SvgIcon name={link.icon}/>
+                        </div>
+                        <span>{link.name}</span>
+                      </NavLink>
+                    </li>
+                  )
+                }) }
+              </div>
+              <div className="mobile-nav__user">
+                <HeaderUser
+                  toggleUsermenu={this.toggleUsermenu}
+                  logOutUser={this.logOutUser}
+                  isMenuOpened={this.state.isMenuOpened}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
