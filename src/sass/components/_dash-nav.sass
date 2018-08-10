@@ -1,6 +1,8 @@
 
 .dash-nav
   background: white
+  &--without-progress
+    margin-top: 125px
   &__wrapper
     display: flex
     align-items: center
@@ -45,3 +47,8 @@
       &:hover
         &::before
           opacity: 1
+
++r($tablet)
+  .dash-nav
+    &--without-progress
+      margin-top: 90px

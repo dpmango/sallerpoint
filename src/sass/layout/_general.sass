@@ -63,3 +63,13 @@ body, html
   .container
     padding-left: 20px
     padding-right: 20px
+
+.for-desktop
+  display: block
+  +r($tablet)
+    display: none
+
+.for-tablet
+  display: none
+  +r($tablet)
+    display: block

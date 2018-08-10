@@ -17,7 +17,7 @@ const login = (state = initialState, action) => {
       return {
         initialState
       }
-      
+
     default:
       return state;
   }

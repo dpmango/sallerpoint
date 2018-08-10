@@ -10,8 +10,6 @@ import DashBusinessResults from '../components/DashDashboards/DashBusinessResult
 import DashOperationalPerformance from '../components/DashDashboards/DashOperationalPerformance'
 import DashAdvertisingPerformance from '../components/DashDashboards/DashAdvertisingPerformance'
 
-import SvgIcon from '../components/SvgIcon';
-
 import { setHeaderClass } from '../actions/header';
 
 class DashboardDashboards extends Component {
@@ -35,19 +33,16 @@ class DashboardDashboards extends Component {
         component: DashFinancialPerformance
       },
       {
-        isExact: false,
         path: `${match.url}/businessResults`,
         name: 'Business Results',
         component: DashBusinessResults
       },
       {
-        isExact: false,
         path: `${match.url}/operationalPerformance`,
         name: 'Operational Performance',
         component: DashOperationalPerformance
       },
       {
-        isExact: false,
         path: `${match.url}/advertisingPerformance`,
         name: 'Advertising Performance',
         component: DashAdvertisingPerformance

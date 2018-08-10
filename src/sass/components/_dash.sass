@@ -104,6 +104,7 @@
 .dash-container
   margin: 20px 0 60px
 
+// grid (two collumned Qlik)
 .dash-grid
   margin-left: -20px
   margin-right: -20px
@@ -116,6 +117,17 @@
     min-height: 0
     padding: 0 20px
 
++r($desktop)
+  .dash-grid
+    margin-left: 0
+    margin-right: 0
+    display: block
+    .dash-section
+      max-width: 100%
+      flex: auto
+      padding: 0
+
+// section
 .dash-section
   margin: 20px 0
   &.is-closed

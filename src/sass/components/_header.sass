@@ -4,6 +4,8 @@
   right: 0
   top: 0
   z-index: 9
+  // fix offset for the dash nav
+  max-height: 125px
   background: $colorBlue
   color: white
   transition: box-shadow .25s $ease
@@ -92,6 +94,7 @@
     align-items: center
     cursor: pointer
     &-avatar
+      flex: 0 0 54px
       size: 54px
       border-radius: 50%
       position: relative
@@ -182,6 +185,13 @@
   .header
 
 
++r($wide)
+  .header
+    &__user
+      &-name
+        display: none
+
+
 +r($desktop)
   .header
     &__hamburger
@@ -204,6 +214,13 @@
     &__logo
 
     &__phone
+
++r(430)
+  .header
+    &--dash-welcome
+      .header
+        &__welcome-link
+          display: none
 
 +r(414)
   .header
