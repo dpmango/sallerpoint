@@ -40,6 +40,11 @@ export const NotFound = MyLoadable({
   modules: ['./pages/NotFound'],
   webpack: () => [require.resolveWeak('./pages/NotFound')]
 });
+export const Configuration = MyLoadable({
+  loader: () => import("./pages/Configuration"),
+  modules: ['./pages/Configuration'],
+  webpack: () => [require.resolveWeak('./pages/Configuration')]
+});
 
 
 export const routes = [
@@ -71,7 +76,12 @@ export const routes = [
     component: LWACallback
   },
   {
+    path: '/configuration',
+    name: 'Configuration',
+    component: Configuration
+  },
+  {
     path: '',
     component: NotFound
-  },
+  }  
 ];

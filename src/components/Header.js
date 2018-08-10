@@ -125,6 +125,14 @@ class Header extends React.Component {
                     <span>Settings</span>
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink to={`${process.env.PUBLIC_URL}/configuration/cogs`} className="" activeClassName="is-active">
+                    <div className="header__dash-icon">
+                      <SvgIcon name="dash-nav-dashboards"/>
+                    </div>
+                    <span>Configuration</span>
+                  </NavLink>
+                </li>
               </ul>
               <div
                 className={"header__user" + ( isMenuOpened ?  " is-active" : "") }
