@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
-import { setHeaderClass } from '../actions/header';
-
 import DashboardWelcome from '../containers/DashboardWelcome';
 import DashboardDashboards from '../containers/DashboardDashboards';
 import DashboardPlannings from '../containers/DashboardPlannings';
