@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-
+import api from '../services/Api';
 import { setHeaderClass } from '../actions/header';
 
 import DashboardWelcome from '../containers/DashboardWelcome';
@@ -10,6 +10,29 @@ import DashboardSettings from '../containers/DashboardSettings';
 
 class Dashboard extends Component {
 
+  componentDidMount(){
+    // this.getTabs();
+  }
+
+  getTabs = () => {
+
+    // invalid token error
+    api
+      .get(`GetTabs`)
+      .then((res) => {
+        console.log('backend responce to GET GetTabs', res)
+
+        if ( res.data.IsSuccess ){
+
+        } else {
+
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
   render(){
     const { match } = this.props
 
@@ -37,15 +60,15 @@ class DashboardSwitch extends React.Component {
     switch (actionParam) {
       case 'dashboards':
         return (
-          <DashboardDashboards />
+          <DashboardDashboards match={match} />
         )
       case 'plannings':
         return (
-          <DashboardPlannings />
+          <DashboardPlannings match={match} />
         )
       case 'settings':
         return (
-          <DashboardSettings />
+          <DashboardSettings match={match} />
         )
       default:
         return <DashboardWelcome />
