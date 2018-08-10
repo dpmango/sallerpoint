@@ -23,7 +23,7 @@ class DashboardPlannings extends Component {
         <Redirect to={`${process.env.PUBLIC_URL}/login`} />
       )
     }
-    
+
     return (
       <React.Fragment>
         <ImportProgress />

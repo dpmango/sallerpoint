@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 
 import ImportProgress from '../components/ImportProgress';
 import DashboardNavTabs from '../components/DashboardNavTabs';
-import DashFinancialPerformance from '../components/DashFinancialPerformance'
-import DashBusinessResults from '../components/DashBusinessResults'
-import DashOperationalPerformance from '../components/DashOperationalPerformance'
-import DashAdvertisingPerformance from '../components/DashAdvertisingPerformance'
+import DashFinancialPerformance from '../components/DashDashboards/DashFinancialPerformance'
+import DashBusinessResults from '../components/DashDashboards/DashBusinessResults'
+import DashOperationalPerformance from '../components/DashDashboards/DashOperationalPerformance'
+import DashAdvertisingPerformance from '../components/DashDashboards/DashAdvertisingPerformance'
 
 import SvgIcon from '../components/SvgIcon';
 
