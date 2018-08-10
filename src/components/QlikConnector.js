@@ -28,7 +28,10 @@ class QlikConnector extends Component {
   // first request API
   requestQlikData = () => {
 
-    if ( this.props.QlikConnected ) return
+    if ( this.props.QlikConnected ) {
+      this.connectQlik() // skip API responce and image reguest
+      return
+    }
 
     this.props.setQlikConnection(false)
 
