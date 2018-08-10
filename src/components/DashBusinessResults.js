@@ -24,7 +24,7 @@ export default class DashBusinessResults extends Component {
                 qdt={{
                   type: 'QdtViz',
                   props: {
-                    id: 'PgaKBD', width: '100%', height: '450px'
+                    id: 'PgaKBD', height: '450px'
                   },
                 }}
               />
@@ -34,7 +34,7 @@ export default class DashBusinessResults extends Component {
                 qdt={{
                   type: 'QdtViz',
                   props: {
-                    id: 'PgaKBD', width: '100%', height: '450px'
+                    id: 'PgaKBD', height: '450px'
                   },
                 }}
               />
@@ -44,7 +44,7 @@ export default class DashBusinessResults extends Component {
                 qdt={{
                   type: 'QdtViz',
                   props: {
-                    id: 'PgaKBD', width: '100%', height: '450px'
+                    id: 'PgaKBD', height: '450px'
                   },
                 }}
               />
@@ -54,7 +54,7 @@ export default class DashBusinessResults extends Component {
                 qdt={{
                   type: 'QdtViz',
                   props: {
-                    id: 'PgaKBD', width: '100%', height: '450px'
+                    id: 'PgaKBD', height: '450px'
                   },
                 }}
               />
@@ -66,7 +66,7 @@ export default class DashBusinessResults extends Component {
               qdt={{
                 type: 'QdtViz',
                 props: {
-                  id: 'PgaKBD', width: '100%', height: '450px'
+                  id: 'PgaKBD', height: '450px'
                 },
               }}
             />

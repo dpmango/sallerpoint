@@ -7,43 +7,44 @@ import DashSection from '../components/DashSection';
 export default class DashFinancialPerformance extends Component {
   render(){
 
+    // TODO - not rendering - wrong type or/and props ?
     const QlikFilters = [
-      // {
-      //   name: "DatePicker",
-      //   qdt: {
-      //     type: 'JQfpVS',
-      //     props: {
-      //       id: 'PgaKBD'
-      //     },
-      //   }
-      // },
-      // {
-      //   name: "SellerId",
-      //   qdt: {
-      //     type: 'WzFqaf',
-      //     props: {
-      //       id: 'PgaKBD'
-      //     },
-      //   }
-      // },
-      // {
-      //   name: "MarketPlace",
-      //   qdt: {
-      //     type: 'UfRGFA',
-      //     props: {
-      //       id: 'PgaKBD'
-      //     },
-      //   }
-      // },
-      // {
-      //   name: "SellerSKU",
-      //   qdt: {
-      //     type: 'jYJJpT',
-      //     props: {
-      //       id: 'PgaKBD'
-      //     },
-      //   }
-      // }
+      {
+        name: "DatePicker",
+        qdt: {
+          type: 'QdtViz',
+          props: {
+            id: 'JQfpVS'
+          },
+        }
+      },
+      {
+        name: "SellerId",
+        qdt: {
+          type: 'QdtViz',
+          props: {
+            id: 'WzFqaf'
+          },
+        }
+      },
+      {
+        name: "MarketPlace",
+        qdt: {
+          type: 'QdtViz',
+          props: {
+            id: 'UfRGFA'
+          },
+        }
+      },
+      {
+        name: "SellerSKU",
+        qdt: {
+          type: 'QdtViz',
+          props: {
+            id: 'jYJJpT'
+          },
+        }
+      }
     ]
     return(
       <React.Fragment>
@@ -57,7 +58,7 @@ export default class DashFinancialPerformance extends Component {
               qdt={{
                 type: 'QdtViz',
                 props: {
-                  id: 'PgaKBD', width: '100%', height: '450px'
+                  id: 'PgaKBD', height: '450px'
                 },
               }}
             />
@@ -67,7 +68,7 @@ export default class DashFinancialPerformance extends Component {
               qdt={{
                 type: 'QdtViz',
                 props: {
-                  id: 'PgaKBD', width: '100%', height: '450px'
+                  id: 'PgaKBD', height: '450px'
                 },
               }}
             />
@@ -77,7 +78,7 @@ export default class DashFinancialPerformance extends Component {
               qdt={{
                 type: 'QdtViz',
                 props: {
-                  id: 'PgaKBD', width: '100%', height: '450px'
+                  id: 'PgaKBD', height: '450px'
                 },
               }}
             />
@@ -87,7 +88,7 @@ export default class DashFinancialPerformance extends Component {
               qdt={{
                 type: 'QdtViz',
                 props: {
-                  id: 'PgaKBD', width: '100%', height: '450px'
+                  id: 'PgaKBD', height: '450px'
                 },
               }}
             />

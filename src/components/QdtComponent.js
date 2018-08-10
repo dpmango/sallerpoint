@@ -36,7 +36,7 @@ class QdtComponent extends Component {
 
     if ( QlikConnected && window.GlobalQdtComponents ){
       // console.log(this.props.QlikInstance)
-      console.log('GlobalQdtComponents in QdtComponenet', window.GlobalQdtComponents)
+      // console.log('GlobalQdtComponents in QdtComponenet', window.GlobalQdtComponents)
       window.GlobalQdtComponents.render(type, props, this.node);
     }
   }

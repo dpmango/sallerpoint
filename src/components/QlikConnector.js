@@ -138,12 +138,11 @@ class QlikConnector extends Component {
     }
 
     // TODO fails with multiple requests
-    
+
     if ( !window.GlobalQdtComponents ){
       const qdtComponents = new QdtComponents(options.config, options.connections);
       window.GlobalQdtComponents = qdtComponents
-      console.log(qdtComponents)
-
+      // console.log(qdtComponents)
     }
 
     // GlobalQdtComponents = qdtComponents
