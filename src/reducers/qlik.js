@@ -2,9 +2,8 @@ import * as types from '../store/ActionTypes';
 
 const initialState = {
   connected: false,
-  params: {
-    
-  }
+  params: {},
+  instance: null
 }
 
 const qlik = (state = initialState, action) => {
@@ -19,6 +18,11 @@ const qlik = (state = initialState, action) => {
       return {
         ...state,
         params: action.payload
+      }
+    case types.SET_QLIK_INSTANCE:
+      return {
+        ...state,
+        instance: action.payload
       }
 
     default:

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -54,6 +54,11 @@ class DashboardDashboards extends Component {
       }
     ];
 
+    if ( !this.props.authToken ){
+      return (
+        <Redirect to={`${process.env.PUBLIC_URL}/login`} />
+      )
+    }
     return (
       <React.Fragment>
         <ImportProgress />
@@ -77,6 +82,7 @@ class DashboardDashboards extends Component {
 
 const mapStateToProps = (state) => (
   {
+    authToken: state.login.authToken
   }
 );
 

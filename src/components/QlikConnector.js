@@ -4,7 +4,7 @@ import api from '../services/Api';
 import axios from 'axios';
 import QdtComponents from 'qdt-components';
 
-import { setQlikParams, setQlikConnection } from '../actions/qlik'
+import { setQlikParams, setQlikConnection, setQlikInstance } from '../actions/qlik'
 
 let GlobalQdtComponents = null
 
@@ -16,7 +16,7 @@ class QlikConnector extends Component {
     this.state = {
       isImageRequested: false,
       isConnected: props.QlikConnected,
-      QlikData: props.QlickParams,
+      QlikData: props.QlikParams,
       apiError: null
     }
   }
@@ -28,7 +28,8 @@ class QlikConnector extends Component {
   // first request API
   requestQlikData = () => {
 
-    if ( this.props.QlikConnected ) {
+    // if ( this.props.QlikInstance ) {
+    if ( window.GlobalQdtComponents || this.props.QlikConnected ) {
       this.connectQlik() // skip API responce and image reguest
       return
     }
@@ -121,7 +122,6 @@ class QlikConnector extends Component {
 
   // step 3 connect and prepare master component
   connectQlik = () => {
-
     const { QlikData } = this.state
     const options = {
       config: {
@@ -137,14 +137,30 @@ class QlikConnector extends Component {
       }
     }
 
-    const qdtComponents = new QdtComponents(options.config, options.connections);
+    // TODO fails with multiple requests
+    
+    if ( !window.GlobalQdtComponents ){
+      const qdtComponents = new QdtComponents(options.config, options.connections);
+      window.GlobalQdtComponents = qdtComponents
+      console.log(qdtComponents)
 
-    GlobalQdtComponents = qdtComponents
+    }
+
+    // GlobalQdtComponents = qdtComponents
+
+    // const { setQlikInstance } = this.props;
+    // let qdtInstance;
+    //
+    // async function getQdt() {
+    //   console.log('called async')
+    //   return qdtComponents.qAppPromise
+    // }
+    // getQdt().then((res) => {
+    //   console.log(res)
+    //   setQlikInstance(qdtInstance)
+    // })
+
     this.props.setQlikConnection(true)
-
-    // qAppPromise: Promise {status: "resolved", result: w}
-    // qDocPromise: null
-    // render: function(t,n,i)
 
   }
 
@@ -157,14 +173,16 @@ class QlikConnector extends Component {
 
 const mapStateToProps = (state) => ({
   QlikConnected: state.qlik.connected,
-  QlickParams: state.qlik.params
+  QlikParams: state.qlik.params,
+  QlikInstance: state.qlik.instance
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setQlikConnection: (data) => dispatch(setQlikConnection(data)),
   setQlikParams: (data) => dispatch(setQlikParams(data)),
+  setQlikInstance: (data) => dispatch(setQlikInstance(data)),
 });
 
-export { GlobalQdtComponents }
+// export { GlobalQdtComponents }
 
 export default connect(mapStateToProps, mapDispatchToProps)(QlikConnector);

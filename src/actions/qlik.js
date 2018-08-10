@@ -9,3 +9,8 @@ export const setQlikParams = (data) => ({
   type: types.SET_QLIK_PARAMS,
   payload: data
 })
+
+export const setQlikInstance = (data) => ({
+  type: types.SET_QLIK_INSTANCE,
+  payload: data
+})
