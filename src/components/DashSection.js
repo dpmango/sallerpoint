@@ -34,7 +34,7 @@ export default class DashSection extends Component {
           <div className={"dash-section__toggler"} onClick={this.toggleTab}>
             <div className="dash-section__toggler-icon"></div>
           </div>
-          <h2 className="dash-sectioon__title">{name}</h2>
+          <h2 className="dash-section__title">{name}</h2>
           { tooltipContent &&
             <Tooltip
               title={tooltipContent}
