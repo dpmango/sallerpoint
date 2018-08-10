@@ -1,0 +1,47 @@
+
+.dash-nav
+  background: white
+  &__wrapper
+    display: flex
+    align-items: center
+    margin-left: -20px
+    margin-right: -20px
+    padding: 10px 0
+    a
+      display: inline-block
+      position: relative
+      font-size: 18px
+      padding: 10px 20px
+      transition: color .25s $ease
+      &::after, &::before
+        display: block
+        content: ' '
+        position: absolute
+      &::before
+        bottom: 3px
+        left: 20px
+        right: 20px
+        height: 5px
+        background: rgba(#3C763D, .22)
+        opacity: 0
+        transition: .25s $ease
+      &::after
+        width: 1px
+        height: 40px
+        background: #979797
+        right: 0px
+        top: 50%
+        transform: translateY(-50%)
+      &:last-child
+        &::after
+          display: none
+
+      &.is-active
+        color: #3C763D
+        font-weight: bold
+        &::before
+          opacity: 1
+
+      &:hover
+        &::before
+          opacity: 1
