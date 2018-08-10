@@ -25,8 +25,6 @@ class DashboardSettings extends Component {
 
     const { match } = this.props // from the router
 
-    console.log(match)
-
     const routes = [
       {
         isExact: true,

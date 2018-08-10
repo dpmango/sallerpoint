@@ -10,6 +10,7 @@ import FormLoader from '../components/FormLoader';
 
 import { setHeaderClass } from '../actions/header';
 import { logIn } from '../actions/login';
+import { setSignupId } from '../actions/signup';
 
 class Login extends Component {
   static propTypes = {
@@ -84,11 +85,20 @@ class Login extends Component {
         //   ""ErrorMessage"": ""An error has occurred.""
         // }"
 
-        if ( res.data.IsSuccess && res.data.AuthToken ){
-          this.props.logIn(res.data.AuthToken);
+        const { IsSuccess, AuthToken, UserInfo } = res.data;
+
+        if ( IsSuccess && AuthToken ){
+          this.props.logIn(AuthToken);
+          this.props.setSignupId(UserInfo.ClientID)
           this.setState({
             authenticated: true
           })
+
+          // also get the singup step and redirect if any
+          if ( !UserInfo.KMASignUpCompleted ){
+            // UserInfo.KMACurrentStep // gets the current step
+            return
+          }
         } else {
           this.setState({
             apiError: res.data.ErrorMessage
@@ -187,6 +197,7 @@ const mapDispatchToProps = (dispatch) => (
   {
     setHeaderClass: (data) => dispatch(setHeaderClass(data)),
     logIn: (data) => dispatch(logIn(data)),
+    setSignupId: (data) => dispatch(setSignupId(data))
   }
 );
 
