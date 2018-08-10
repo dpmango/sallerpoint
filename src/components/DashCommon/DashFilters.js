@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import QdtComponent from './QdtComponent';
+import QdtComponent from '../Qlik/QdtComponent';
 
 export default class DashFilters extends Component {
   render(){

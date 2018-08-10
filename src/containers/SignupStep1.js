@@ -6,9 +6,9 @@ import ReCAPTCHA from 'react-google-recaptcha';
 
 import { setSignupStep, setSignupEmail, setSignupId, setSignupFields } from '../actions/signup';
 import api from '../services/Api';
-import FormInput from '../components/FormInput';
-import PassMeter from '../components/PassMeter';
-import FormLoader from '../components/FormLoader';
+import FormInput from '../components/Forms/FormInput';
+import PassMeter from '../components/Forms/PassMeter';
+import FormLoader from '../components/Forms/FormLoader';
 
 // Formsy.addValidationRule('isValidPassword', (values, value) => {
 //   // const min_length = value ? value.length >= 8 : false

@@ -8,8 +8,7 @@ class ConnectMarketplaces extends Component{
     super(props)
 
     this.state = {
-      sellerMarketplaces: [],
-      apiError: null
+      sellerMarketplaces: []
     }
   }
 
@@ -36,9 +35,6 @@ class ConnectMarketplaces extends Component{
             sellerMarketplaces: availableMarketplaces
           })
         } else {
-          this.setState({
-            apiError: res.data.ErrorMessage
-          })
 
           if ( this.props.onApiError ){
             this.props.onApiError(res.data.ErrorMessage)
@@ -116,7 +112,7 @@ class ConnectMarketplaces extends Component{
       "Advertising Data Status"
     ]
 
-    const { sellerMarketplaces, apiError } = this.state;
+    const { sellerMarketplaces } = this.state;
 
     return(
       <table className="signup__table">

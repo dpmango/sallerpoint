@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import ImportProgress from '../components/ImportProgress';
+import ImportProgress from '../components/DashCommon/ImportProgress';
 import VideoList from '../components/VideoList';
 import Alert from '../components/Alert';
-import SvgIcon from '../components/SvgIcon';
+import SvgIcon from '../components/Helpers/SvgIcon';
 
 import { setHeaderClass } from '../actions/header';
 

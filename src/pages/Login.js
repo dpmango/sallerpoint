@@ -4,9 +4,9 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Formsy from 'formsy-react';
 import api from '../services/Api';
-import FormInput from '../components/FormInput';
-import CheckBox from '../components/CheckBox';
-import FormLoader from '../components/FormLoader';
+import FormInput from '../components/Forms/FormInput';
+import CheckBox from '../components/Forms/CheckBox';
+import FormLoader from '../components/Forms/FormLoader';
 
 import { setHeaderClass } from '../actions/header';
 import { logIn } from '../actions/login';

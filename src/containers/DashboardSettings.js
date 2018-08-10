@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Link, Route, Redirect } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { setHeaderClass } from '../actions/header';
 
-import DashboardNavTabs from '../components/DashboardNavTabs';
+import DashboardNavTabs from '../components/DashCommon/DashboardNavTabs';
 import DashMarketplaceConfig from '../components/DashSettings/DashMarketplaceConfig'
 import DashCOGSSetup from '../components/DashSettings/DashCOGSSetup'
 import DashSKUASINGrouping from '../components/DashSettings/DashSKUASINGrouping'

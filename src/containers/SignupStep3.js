@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { setSignupStep, setSignupFields } from '../actions/signup';
+import { setSignupStep } from '../actions/signup';
 // import SvgIcon from '../components/SvgIcon';
-import FormLoader from '../components/FormLoader';
+import FormLoader from '../components/Forms/FormLoader';
 import ConnectMarketplaces from '../components/ConnectMarketplaces';
 import api from '../services/Api'
 
@@ -12,14 +12,13 @@ import api from '../services/Api'
 class SignupStep3 extends Component {
   static propTypes = {
     setSignupStep: PropTypes.func,
-    setSignupFields: PropTypes.func
+    // setSignupFields: PropTypes.func
   };
 
   constructor(props){
     super(props)
 
     this.state = {
-      // connectedId: [],
       shouldRedirect: false,
       isFormSubmited: false,
       apiError: null
@@ -59,8 +58,8 @@ class SignupStep3 extends Component {
   }
 
   render(){
-    const { connectedId, shouldRedirect, isFormSubmited, apiError } = this.state;
-    const { signupFields } = this.props;
+    const { shouldRedirect, isFormSubmited, apiError } = this.state;
+    // const { signupFields } = this.props;
 
     if ( shouldRedirect ){
       return <Redirect to={`${process.env.PUBLIC_URL}/dash`} />
@@ -91,13 +90,11 @@ class SignupStep3 extends Component {
 
 
 const mapStateToProps = (state) => ({
-  signupFields: state.signup.fields,
   signupId: state.signup.signupId,
   LWA: state.lwa
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setSignupFields: (data) => dispatch(setSignupFields(data)),
   setSignupStep: (data) => dispatch(setSignupStep(data)),
 });
 

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 
-import QlikConnector from '../QlikConnector';
-import DashFilters from '../DashFilters';
-import DashSection from '../DashSection';
-
+import QlikConnector from '../Qlik/QlikConnector';
+import DashFilters from '../DashCommon/DashFilters';
+import DashSection from '../DashCommon/DashSection';
 
 export default class DashOperationalPerformance extends Component {
   render(){

@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux'
-import api from '../services/Api';
+import api from '../../services/Api';
 import axios from 'axios';
 import QdtComponents from 'qdt-components';
 
-import { setQlikParams, setQlikConnection, setQlikInstance } from '../actions/qlik'
+import { setQlikParams, setQlikConnection, setQlikInstance } from '../../actions/qlik'
 
-let GlobalQdtComponents = null
+// let GlobalQdtComponents = null
 
-class QlikConnector extends Component {
+class QlikConnector extends React.Component {
 
   constructor(props){
     super(props)

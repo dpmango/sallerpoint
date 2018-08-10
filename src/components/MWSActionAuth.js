@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Formsy from 'formsy-react';
-import FormInput from '../components/FormInput';
-import Image from './Image';
-import FormLoader from './FormLoader';
+import FormInput from './Forms/FormInput';
+import Image from './Helpers/Image';
+import FormLoader from './Forms/FormLoader';
 import api from '../services/Api';
 import { setSignupFields, setSignupAuthStep } from '../actions/signup';
 

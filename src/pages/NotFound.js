@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { SET_HEADER_CLASS } from '../store/ActionTypes';
 
-import SvgIcon from '../components/SvgIcon';
+import SvgIcon from '../components/Helpers/SvgIcon';
 
 class NotFound extends Component {
   static propTypes = {

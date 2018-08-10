@@ -5,7 +5,7 @@ import api from '../services/Api';
 import { setHeaderClass } from '../actions/header';
 import store from '../store/store';
 
-import ImportProgress from '../components/ImportProgress';
+import ImportProgress from '../components/DashCommon/ImportProgress';
 
 
 class ConfigurationCOGS extends Component {
@@ -19,12 +19,12 @@ class ConfigurationCOGS extends Component {
           this.getAllCOGS();
       }
 
-      
+
   componentDidMount(){
     this.props.setHeaderClass('header--dash');
   }
 
-  getAllCOGS = () => {  
+  getAllCOGS = () => {
 
     console.log(store.getState().login);
     api
@@ -38,12 +38,12 @@ class ConfigurationCOGS extends Component {
         // }"
 
         if ( res.data.IsSuccess && res.data.AuthToken ){
-        
+
         } else {
           this.setState({
             apiError: res.data.ErrorMessage
           })
-        }        
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -71,11 +71,11 @@ const mapStateToProps = (state) => (
     {
     }
   );
-  
+
   const mapDispatchToProps = (dispatch) => (
     {
       setHeaderClass: (data) => dispatch(setHeaderClass(data))
     }
   );
-  
+
   export default connect(mapStateToProps, mapDispatchToProps)(ConfigurationCOGS)

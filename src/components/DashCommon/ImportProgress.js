@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import api from '../services/Api';
+import api from '../../services/Api';
 
 class ImportProgress extends Component {
   static propTypes = {

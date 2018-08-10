@@ -7,7 +7,7 @@ import api from '../services/Api';
 import { OPEN_MENU, CLOSE_MENU } from '../store/ActionTypes';
 import { logOut } from '../actions/login';
 
-import SvgIcon from '../components/SvgIcon'
+import SvgIcon from '../components/Helpers/SvgIcon'
 import HeaderUser from './HeaderUser';
 
 class Header extends React.Component {
@@ -82,7 +82,7 @@ class Header extends React.Component {
 
   render(){
 
-    const { isMenuOpened } = this.state;
+    // const { isMenuOpened } = this.state;
     const { menuOpened } = this.props;
 
     const dashNavLinks = [

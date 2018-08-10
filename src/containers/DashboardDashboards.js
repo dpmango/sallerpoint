@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Link, Route, Redirect } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import ImportProgress from '../components/ImportProgress';
-import DashboardNavTabs from '../components/DashboardNavTabs';
+import ImportProgress from '../components/DashCommon/ImportProgress';
+import DashboardNavTabs from '../components/DashCommon/DashboardNavTabs';
 import DashFinancialPerformance from '../components/DashDashboards/DashFinancialPerformance'
 import DashBusinessResults from '../components/DashDashboards/DashBusinessResults'
 import DashOperationalPerformance from '../components/DashDashboards/DashOperationalPerformance'

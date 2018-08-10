@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import CheckBox from './CheckBox';
-import FormLoader from './FormLoader';
+import CheckBox from './Forms/CheckBox';
+import FormLoader from './Forms/FormLoader';
 import api from '../services/Api';
 import { setSignupFields, setSignupStep, setSignupAuthStep } from '../actions/signup';
 
@@ -90,7 +90,7 @@ class MWSActionDomain extends Component {
               .catch(err => {
 
               });
-              
+
           } else {
             this.setState({
               apiError: res.data.ErrorMessage

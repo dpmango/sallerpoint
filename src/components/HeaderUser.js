@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import SvgIcon from '../components/SvgIcon'
+import SvgIcon from '../components/Helpers/SvgIcon'
 
 export default class HeaderUser extends Component{
 

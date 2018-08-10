@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {Tooltip} from 'react-tippy';
-import QdtComponent from './QdtComponent';
-import SvgIcon from './SvgIcon';
-import api from '../services/Api';
+import QdtComponent from '../Qlik/QdtComponent';
+import SvgIcon from '../Helpers/SvgIcon';
+// import api from '../../services/Api';
 
 export default class DashSection extends Component {
 

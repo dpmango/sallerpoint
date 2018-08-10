@@ -7,7 +7,7 @@ const Image = (props) => {
 
   return (
     <React.Fragment>
-      <img src={require(`../images/${imgName}.${imgExt}`)} srcSet={require(`../images/${imgName}@2x.${imgExt}`)  + ' 2x'} alt=""/>
+      <img src={require(`../../images/${imgName}.${imgExt}`)} srcSet={require(`../../images/${imgName}@2x.${imgExt}`)  + ' 2x'} alt=""/>
     </React.Fragment>
   )
 }
