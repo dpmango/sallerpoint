@@ -79,11 +79,6 @@ class Login extends Component {
       .post(`Login`, loginData)
       .then((res) => {
         console.log('backend responce to POST LOGIN', res)
-        // "{
-        //   ""AuthToken"": ""bk5KY1YyQllmZHZJMm85THBiQmcxQm4zM3A4VElMRmNkSjdISFN0dG9Qbz06cG11bmRvbGltb29sZUB0aGVraW5pZ3JvdXAuY29tOjYzNjY4ODk4MTg2OTA5MDc4Nw=="",
-        //   ""IsSuccess"": true,
-        //   ""ErrorMessage"": ""An error has occurred.""
-        // }"
 
         const { IsSuccess, AuthToken, UserInfo } = res.data;
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import onClickOutside from "react-onclickoutside";
-
+import api from '../services/Api';
 import { OPEN_MENU, CLOSE_MENU } from '../store/ActionTypes';
 import { logOut } from '../actions/login';
 
@@ -52,6 +52,26 @@ class Header extends React.Component {
   logOutUser = () => {
     // destroy session
     this.props.logOut()
+
+    // let the API know about it
+
+    // TODO
+    // For some reason IsSuccess is false
+    api
+      .get(`LogOff`)
+      .then((res) => {
+        console.log('backend responce to GET LogOff', res)
+
+        const { IsSuccess } = res.data;
+
+        if ( IsSuccess ){
+          // do something ?
+
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   toggleUsermenu = () => {

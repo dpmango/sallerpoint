@@ -31,7 +31,7 @@ export default class HeaderUser extends Component{
                 <a href="">Some action</a>
               </li>
               <li>
-                <a href="" onClick={this.props.logOutUser}>Log out</a>
+                <a onClick={this.props.logOutUser}>Log out</a>
               </li>
             </div>
           </div>
