@@ -11,9 +11,7 @@ export default class Home extends Component {
           <br/><br/>
           <Link to={`${process.env.PUBLIC_URL}/signup`} className="btn btn-signup">Signup page</Link>
           <br/><br/>
-          <Link to={`${process.env.PUBLIC_URL}/dash`} className="btn btn-signup">Dashboard page</Link>
-          <br/><br/>
-          <Link to={`${process.env.PUBLIC_URL}/configuration`} className="btn btn-signup">Configuration page</Link>
+          <Link to={`${process.env.PUBLIC_URL}/dash`} className="btn btn-signup">Dashboard page</Link>         
         </div>
       </div>
     )

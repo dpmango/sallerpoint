@@ -10,6 +10,9 @@ import api from '../services/Api'
 
 
 class SignupStep3 extends Component {
+
+  isAdvertisingOptedOut=false;
+
   static propTypes = {
     setSignupStep: PropTypes.func,
     // setSignupFields: PropTypes.func
@@ -47,13 +50,19 @@ class SignupStep3 extends Component {
         console.log(res)
       })
       .catch(err => {
-
       });
+  }
 
+  advertisingOptedOutChange(checked){   
+this.isAdvertisingOptedOut=checked.target.checked;
   }
 
   async compleateSignupOnBackend(){
-    const res = await api.post('SignUpComplete');
+
+    if (this.isAdvertisingOptedOut){    
+      await api.post('AdvertisingOptOut', {sellerId : this.props.SellerId});
+    }
+   const res = await api.post('SignUpComplete');
     return await res.data;
   }
 
@@ -78,6 +87,10 @@ class SignupStep3 extends Component {
                 onApiError={this.setApiError}
                 onFormSubmited={this.onFormSubmited}
               />
+               <div className="signup__form-cta signup__form-cta--centered">
+               <input type="checkbox"onChange= {(e, checked) => this.advertisingOptedOutChange(e)}/> I don`t have advertising data to connect
+              </div>
+
               <div className="signup__form-cta signup__form-cta--centered">
                 <span onClick={this.compleateSignup} className="btn btn-signup btn--block">Complete</span>
               </div>
@@ -91,7 +104,8 @@ class SignupStep3 extends Component {
 
 const mapStateToProps = (state) => ({
   signupId: state.signup.signupId,
-  LWA: state.lwa
+  LWA: state.lwa,
+  SellerId: state.seller_Id
 });
 
 const mapDispatchToProps = (dispatch) => ({

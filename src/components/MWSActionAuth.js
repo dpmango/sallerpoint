@@ -59,7 +59,8 @@ class MWSActionAuth extends Component {
     }
 
     this.setState({
-      isFormSubmited: true
+      isFormSubmited: true,
+      seller_id:leadObj.sellerId
     })
 
     // authenticate

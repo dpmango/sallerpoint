@@ -100,12 +100,7 @@ class Header extends React.Component {
         name: "Settings",
         path: "/dash/settings",
         icon: "dash-nav-settings"
-      },
-      {
-        name: "Configuration",
-        path: "/configuration/cogs",
-        icon: "dash-nav-dashboards"
-      }
+      }     
     ]
 
     return(
