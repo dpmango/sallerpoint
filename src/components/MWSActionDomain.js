@@ -157,7 +157,8 @@ class MWSActionDomain extends Component {
 const mapStateToProps = (state) => ({
   signupId: state.signup.signupId,
   signupFields: state.signup.fields,
-  signupAuthStep: state.signup.signupAuthStep
+  signupAuthStep: state.signup.signupAuthStep,
+  sellerId:state.seller_id
 });
 
 const mapDispatchToProps = (dispatch) => ({

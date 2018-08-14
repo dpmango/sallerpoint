@@ -59,8 +59,10 @@ this.isAdvertisingOptedOut=checked.target.checked;
 
   async compleateSignupOnBackend(){
 
-    if (this.isAdvertisingOptedOut){    
-      await api.post('AdvertisingOptOut', {sellerId : this.props.SellerId});
+    if (this.isAdvertisingOptedOut){
+      console.log(this.state);
+      console.log(this.props);
+      await api.post('AdvertisingOptOut', {sellerId : this.props.sellerId});
     }
    const res = await api.post('SignUpComplete');
     return await res.data;
@@ -105,7 +107,7 @@ this.isAdvertisingOptedOut=checked.target.checked;
 const mapStateToProps = (state) => ({
   signupId: state.signup.signupId,
   LWA: state.lwa,
-  SellerId: state.seller_Id
+  sellerId: state.seller_Id
 });
 
 const mapDispatchToProps = (dispatch) => ({
