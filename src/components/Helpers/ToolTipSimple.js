@@ -2,17 +2,13 @@ import React, { Component } from 'react';
 import SvgIcon from './SvgIcon';
 import { Tooltip } from 'react-tippy';
 
-function createMarkup(html) {
-    return { __html: html };
-}
-
 const ToolTipSimpleContent = (props) => {
     const { toolTipheader, toolTipContent } = props
     
     return (
         <div>
             <h3 className="tooltip-header">{toolTipheader}</h3>
-            <div dangerouslySetInnerHTML={createMarkup(toolTipContent)}/>
+            <div dangerouslySetInnerHTML={{ __html: toolTipContent }} />
         </div>
     )
 }

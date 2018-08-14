@@ -3,10 +3,6 @@ import SvgIcon from './SvgIcon';
 import { Tooltip } from 'react-tippy';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
-function createMarkup(html) {
-    return { __html: html };
-}
-
 const ToolTipTabbedContent = (props) => {
     const { toolTipheader, toolTipTabs, toolTipTabContents } = props
 
@@ -16,7 +12,7 @@ const ToolTipTabbedContent = (props) => {
 
     const tabPanels = toolTipTabContents && toolTipTabContents.map((content, index) =>
         <TabPanel key={index.toString()}>
-            <div dangerouslySetInnerHTML={createMarkup(content)} />
+            <div dangerouslySetInnerHTML={{ __html: content }} />
         </TabPanel>
     );
 
