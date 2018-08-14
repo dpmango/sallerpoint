@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Tooltip } from 'react-tippy';
 import QdtComponent from '../Qlik/QdtComponent';
-import SvgIcon from '../Helpers/SvgIcon';
-// import api from '../../services/Api';
+import TooltipSimple from '../Helpers/ToolTipSimple';
+import ToolTipTabbed from '../Helpers/ToolTipTabbed';
 
 export default class DashSection extends Component {
 
@@ -25,7 +24,7 @@ export default class DashSection extends Component {
 
     render() {
 
-        const { name, tooltipTitle, tooltipContent, qdt } = this.props;
+        const { name, qdt, toolTipSimple, toolTipTabbed, toolTipHeader, toolTipContent, toolTipTabs, toolTipTabContents } = this.props;
         const { isTabOpened } = this.state
 
         return (
@@ -35,19 +34,8 @@ export default class DashSection extends Component {
                         <div className="dash-section__toggler-icon"></div>
                     </div>
                     <h2 className="dash-section__title">{name}</h2>
-                    {(tooltipContent || tooltipTitle) &&
-                        <Tooltip
-                            title={tooltipTitle}
-                            html={tooltipContent}
-                            position="top"
-                            distance="10"
-                            interactive="true"
-                            arrow="true">
-                            <div className="tooltip-icon">
-                                <SvgIcon name="info-mark" />
-                            </div>
-                        </Tooltip>
-                    }
+                    {toolTipSimple && <TooltipSimple toolTipheader={toolTipHeader} toolTipContent={toolTipContent} />}
+                    {toolTipTabbed && <ToolTipTabbed toolTipheader={toolTipHeader} toolTipTabs={toolTipTabs} toolTipTabContents={toolTipTabContents} />}
                 </div>
                 <div className="dash-section__chart">
                     {qdt &&
