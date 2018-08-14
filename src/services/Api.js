@@ -2,8 +2,8 @@ import axios from 'axios';
 import store from '../store/store';
 
 // const BACKEND_URL = process.env.NODE_ENV === 'production' ? "http://name.herokuapp.com" : "http://localhost:8000/"
-const BACKEND_URL = "http://localhost:10547/SellerPoint/"
-//const BACKEND_URL = "http://qa.kinimetrix.com:8082/SellerPoint/";
+//const BACKEND_URL = "http://localhost:10547/SellerPoint/"
+const BACKEND_URL = "http://qa.kinimetrix.com:8082/SellerPoint/";
 
 axios.defaults.withCredentials = true;
 

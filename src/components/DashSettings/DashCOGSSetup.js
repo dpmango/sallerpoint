@@ -22,7 +22,7 @@ export default class DashCOGSSetup extends Component {
       open:false        
     };
     this.getAllCOGS();  
-    this.renderEditable = this.renderEditable.bind(this); 
+    this.renderLandedCost = this.renderLandedCost.bind(this); 
   }
 
   onOpenModal = () => {
@@ -94,18 +94,29 @@ onDownloadFile=()=>{
       });
   }
 
-  renderEditable(cellInfo) {
-    return(<div className="inpt-landed-cost">{["$", 
+  renderLandedCost(cellInfo) {
+   
+      return(<div className="inpt-landed-cost">{["$", 
       <input type={"number"} min={0}
       contentEditable      
         style={{ backgroundColor: "#fafafa",width: "100%","text-align": "right" }} 
-        defaultValue={cellInfo.original.LandedCost}
+        defaultValue={cellInfo.original.LandedCost.toFixed(2)}
         onChange={e => {
                   this.lstEditedCOGS.push({COGSId :cellInfo.original.COGSId, LandedCost: e.target.value });                           
                 }}
       />]}</div>
-    );
+    );  
+   
   }
+
+  
+  renderAvgHistoricalPrice(cellInfo) {   
+    if (cellInfo.original.AvgHistoricalPrice==0){
+      return ('N/A');
+    }else {
+      return (['$',cellInfo.original.AvgHistoricalPrice.toFixed(2)]);
+    }
+}
 
   saveCOGS=()=>{
    if(this.lstEditedCOGS.length>0){
@@ -198,10 +209,11 @@ onDownloadFile=()=>{
                 {
                   Header: "Avg. Hist. Price", 
                   id:"AvgHistoricalPrice",                  
-                  accessor: d => ["$",d.AvgHistoricalPrice],
+                  accessor: d => ["$",()=> { return d.AvgHistoricalPrice.toFixed(2)}],
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["AvgHistoricalPrice"] }),
-                  filterAll: true
+                  filterAll: true,
+                  Cell :this.renderAvgHistoricalPrice
                 } ,
                 {
                   Header: "Landed Cost", 
@@ -210,11 +222,13 @@ onDownloadFile=()=>{
                   filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["LandedCost"] }),
                   filterAll: true,
-                  Cell :this.renderEditable
+                  Cell :this.renderLandedCost
                 }                                    
           ]}
           defaultPageSize={10}
           className="-striped -highlight"
+          nextText=">>"
+          previousText="<<"
         />
         <br />     
 
@@ -229,9 +243,7 @@ onDownloadFile=()=>{
         <Modal open={open} onClose={this.onCloseModal}>
         <div class="modal-dialog modal-md">
         <div class="modal-content">
-            <div class="modal-header">
-                <input id="hdnDefaultType" type="hidden" />
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="fa fa-times"></span></button>
+            <div class="modal-header">              
                 <h4 class="modal-title" id="myModalLabel">Bulk CSV Edit</h4>
             </div>
             <div class="modal-body modal-body-update">
@@ -244,7 +256,7 @@ onDownloadFile=()=>{
                         </p>
 
                         <p>
-                            1. Click on button <b>Download CSV template</b> and download the template file.
+                            1. Click on button <b class="head">Download CSV template</b> and download the template file.
                         </p>
                         <p>
                             2. Enter your Landed Cost per unit in the format '12.34' in the respective columns
