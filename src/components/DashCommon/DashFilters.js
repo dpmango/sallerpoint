@@ -6,21 +6,21 @@ export default class DashFilters extends Component {
 
         // TODO - not rendering - wrong type or/and props ?
         const filters = [
-            //{
-            //    name: "DatePicker",
-            //    qdt: {
-            //        type: 'QdtViz',
-            //        props: {
-            //            id: 'JQfpVS', height: '40px',width:'400px'
-            //        },
-            //    }
-            //},
             {
                 name: "DataGroupedBy",
                 qdt: {
                     type: 'QdtViz',
                     props: {
-                        id: 'FvJhW', height: '40px', width: '200px'
+                        id: 'uFJU', height: '40px', width: '200px'
+                    },
+                }
+            },
+           {
+                name: "DatePicker",
+                qdt: {
+                    type: 'QdtViz',
+                    props: {
+                        id: 'JQfpVS', height: '40px',width:'400px'
                     },
                 }
             },
@@ -29,7 +29,7 @@ export default class DashFilters extends Component {
                 qdt: {
                     type: 'QdtViz',
                     props: {
-                        id: 'WzFqaf', height: '44px', width: '200px'
+                        id: 'WzFqaf', height: '40px', width: '200px'
                     },
                 }
             },

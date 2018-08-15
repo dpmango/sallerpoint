@@ -38,10 +38,10 @@ export default class DashBusinessResults extends Component {
                                 }}
                             />
                             <DashSection
-                                name="Average Sale Price"
+                                name="Average Sale Price (including promotions)"
                                 toolTipSimple="true"
-                                toolTipHeader="Average Sale Price"
-                                toolTipContent="Average Sale Price is a weighted average measure of the prices you've been charging for your products over time."
+                                toolTipHeader="Average Sale Price (including promotions)"
+                                toolTipContent="Average Sale Price is a weighted average measure of the prices you've been charging for your products over time. This includes promotions, so this is a measure of the true sales price."
                                 qdt={{
                                     type: 'QdtViz',
                                     props: {

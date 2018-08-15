@@ -17,9 +17,9 @@ export default class DashFinancialPerformance extends Component {
                             name="Profitability: Net & Gross"
                             toolTipTabbed="true"
                             toolTipHeader="Profitability Metrics"
-                            toolTipTabs={['PRR: Profit to Revenue Ratio', 'Profit Efficiency']}
-                            toolTipTabContents={['Net Profit as a % of Net Revenue. This metric provides an intimate view of bottom line margin, without introducing Operational Expenditure.',
-                                'Net Profit as a % of Gross Profit. This reflects Amazon fees, advertising, promotions, and refund fee adjustments. Many of these have a controllable impact on profitability.']}
+                            toolTipTabs={['Gross Profit', 'Net Profit']}
+                            toolTipTabContents={['Gross Profit is a measure of the profit that is made after deducing the costs of creating and manufacturing the products. This is calculated by taking Net Revenue and subtracting out the COGS (cost of goods sold).',
+                                'Net Profit is the bottom line profitability of selling products. This includes everything including commissions, fees, adjustments, advertising costs, etc. This is calculated by taking Gross Profit and subtracting out any additional costs that a seller may incur to sell an item.']}
                             qdt={{
                                 type: 'QdtViz',
                                 props: {
@@ -28,11 +28,16 @@ export default class DashFinancialPerformance extends Component {
                             }}
                         />
                         <DashSection
-                            name="Profit Efficiency Trend"
+                            name="Profit Efficiency Trends"
+                            toolTipTabbed="true"
+                            toolTipHeader="Profitability Metrics"
+                            toolTipTabs={['Profit Efficiency', 'Gross Margin %']}
+                            toolTipTabContents={['Net Profit as a % of Gross Profit. This reflects Amazon fees, advertising spend, and refund fee adjustments, among several other components . Many of these have a controllable impact on profitability.',
+                                "Gross Margin % is a measure of the health of the first step of controlling profitability. It's calculated as product COGS as a % of product sales."]}
                             qdt={{
                                 type: 'QdtViz',
                                 props: {
-                                    id: 'CGFtRz', height: '156px'
+                                    id: 'QrVLDbS', height: '156px'
                                 },
                             }}
                         />
